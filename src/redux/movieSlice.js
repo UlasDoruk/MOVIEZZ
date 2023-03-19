@@ -1,9 +1,15 @@
 import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-// const config = {
-//   headers: { Authorization: `Bearer ${process.env.REACT_APP_API_TOKEN}` },
-// };
+export const fetchTopRatedMovies = createAsyncThunk(
+  "movies/getTopRatedMovies",
+  async (page) => {
+    const res = await axios.get(
+      `${process.env.REACT_APP_API_BASE_ENDPOINT}/movie/top_rated?api_key=${process.env.REACT_APP_API_TOKEN}&language=en-US&page=${page}`
+    );
+    return res.data.results;
+  }
+);
 
 export const fetchPopularMovies = createAsyncThunk(
   "movies/getPopularMovies",async (page) => {
@@ -29,7 +35,8 @@ export const movieSlice = createSlice({
   name: "movies",
   initialState: {
     popularMovies:[],
-    upcomingMovies:[]
+    upcomingMovies:[],
+    topRatedMovies:[]
   },
   reducers: {},
   extraReducers: {
@@ -37,6 +44,8 @@ export const movieSlice = createSlice({
         state.popularMovies = action.payload
     },[fetchUpcomingMovies.fulfilled]:(state,action)=>{
         state.upcomingMovies=action.payload
+    },[fetchTopRatedMovies.fulfilled]:(state,action)=>{
+      state.topRatedMovies = action.payload
     }
   },
 });

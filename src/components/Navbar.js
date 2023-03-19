@@ -12,16 +12,12 @@ function Navbar() {
           MOVIEZZ <BiCameraMovie className="mt-1 ml-2" />
         </p>
       </Link>
-      <div className="flex justify-center space-x-5 lg:ml-32">
+      <div className="flex justify-center space-x-5 lg:ml-36">
         <Link to={"/toprated"}>
-          <p className="text-xl hover:scale-110">
-            Top Rated
-          </p>
+          <p className="text-xl hover:scale-110 uppercase">Top Rated</p>
         </Link>
         <Link to={"/login"}>
-          <p className="text-xl hover:scale-110">
-            Login
-          </p>
+          <p className="text-xl hover:scale-110 uppercase">Login</p>
         </Link>
       </div>
       <SearchBar />
