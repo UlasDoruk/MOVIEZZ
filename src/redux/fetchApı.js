@@ -7,7 +7,7 @@ export const fetchMovieTrailer = createAsyncThunk(
     const res = await axios.get(
       `${process.env.REACT_APP_API_BASE_ENDPOINT}/movie/${id}/videos?api_key=${process.env.REACT_APP_API_TOKEN}&language=en-US`
     );
-    return res.data;
+    return res.data.results;
   }
 );
 

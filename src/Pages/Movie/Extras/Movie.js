@@ -7,6 +7,8 @@ import { MdOutlineVideoLibrary } from "react-icons/md";
 
 function Movie() {
 
+  let isOffical = true
+
   // Selectors
   const movie = useSelector((state)=>state.movies.movie)
   const shortDate = useSelector((state)=>state.movies.shortDate)
@@ -17,6 +19,7 @@ function Movie() {
   const movieCreditsDirectors = useSelector((state) => state.movies.movieCreditsDirectors);
   const movieCreditsActors = useSelector((state) => state.movies.movieCreditsActors);
   const movieTrailer = useSelector((state) => state.movies.movieTrailer);
+  const movieFirstTrailer = useSelector((state) => state.movies.movieFirstTrailer);
 
   return (
     <div
@@ -65,13 +68,32 @@ function Movie() {
             <button className="bg-red-700 p-2 ml-5 rounded-full hover:bg-amber-500">
               <AiFillHeart className="w-5 h-5" />
             </button>
-            <a
-              target={"_blank"}
-              href={`https://www.youtube.com/watch?v=${movieTrailer.key}&ab_channel=UniversalPictures`}
-              className="flex hover:scale-110  rounded-lg ml-5 text-2xl"
-            >
-              <MdOutlineVideoLibrary className="mt-2 mr-2 ml-5" /> Watch Trailer
-            </a>
+            {movieTrailer.map((item, index) => {
+              if (item.name === "Official Trailer") {
+                isOffical = false;
+                return (
+                  <a
+                    key={index}
+                    target={"_blank"}
+                    href={`https://www.youtube.com/watch?v=${item.key}`}
+                    className="flex hover:scale-110  rounded-lg ml-5 text-2xl"
+                  >
+                    <MdOutlineVideoLibrary className="mt-2 mr-2 ml-5" /> Watch
+                    Trailer
+                  </a>
+                );
+              }
+            })}
+            {isOffical && (
+              <a
+                target={"_blank"}
+                href={`https://www.youtube.com/watch?v=${movieFirstTrailer.key}`}
+                className="flex hover:scale-110  rounded-lg ml-5 text-2xl"
+              >
+                <MdOutlineVideoLibrary className="mt-2 mr-2 ml-5" /> Watch
+                Trailer
+              </a>
+            )}
           </div>
           <h2 className="text-white flex justify-start uppercase italic opacity-80 pb-5">
             {movie.tagline}
@@ -79,17 +101,18 @@ function Movie() {
           <p className="text-justify text-lg w-1/2 pb-10">{movie.overview}</p>
           <div className="flex justify-start">
             {movieCreditsDirectors.map((item, index) => {
-              return (
-                <span className="flex flex-col w-1/6" key={index}>
-                  <span className=" underline justify-start flex ">
-                    Director
+              if (item.known_for_department === "Directing") {
+                return (
+                  <span className="flex flex-col w-1/6" key={index}>
+                    <span className=" underline justify-start flex ">
+                      Director
+                    </span>
+                    <span className="justify-start flex text-justify">
+                      {item.name}
+                    </span>
                   </span>
-                  <span className="justify-start flex text-justify">
-                    {" "}
-                    {item}
-                  </span>
-                </span>
-              );
+                );
+              }
             })}
           </div>
         </div>

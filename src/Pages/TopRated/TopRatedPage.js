@@ -4,7 +4,12 @@ import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 
 // Redux
-import { fetchTopRatedMovies } from "../../redux/fetchApı";
+import {
+  fetchTopRatedMovies,
+  fetchMovie,
+  fetchMovieCredits,
+  fetchMovieTrailer,
+} from "../../redux/fetchApı";
 import { useDispatch, useSelector } from "react-redux";
 
 // Icon
@@ -24,6 +29,12 @@ function TopRatedPage() {
   // Page number changer func
   const handlePageNumber = () => {
     dispatch(fetchTopRatedMovies(pageNumber));
+  };
+
+  const handleMovieID = (item_ID) => {
+    dispatch(fetchMovie(item_ID));
+    dispatch(fetchMovieCredits(item_ID));
+    dispatch(fetchMovieTrailer(item_ID));
   };
 
   useEffect(() => {
@@ -57,8 +68,11 @@ function TopRatedPage() {
                 <p className="mb-3  mt-5 font-bold text-2xl text-justify  text-white opacity-50">
                   {item.overview}
                 </p>
-                <Link to={"/"} className="flex justify-center ">
-                  <button className="text-white  p-2 absolute  w-1/2 flex justify-center bottom-0 bg-sky-400 hover:bg-sky-800">
+                <Link to={`/movie/${item.id}`} className="flex justify-center ">
+                  <button
+                    onClick={() => handleMovieID(item.id)}
+                    className="text-white  p-2 absolute  w-1/2 flex justify-center bottom-0 bg-sky-400 hover:bg-sky-800"
+                  >
                     <FaWalking className="lg:w-10 lg:h-10 w-5 h-5 " />
                   </button>
                 </Link>

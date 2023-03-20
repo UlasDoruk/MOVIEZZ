@@ -4,7 +4,7 @@ import HomePage from "./Pages/Home/HomePage";
 import TopRatedPage from "./Pages/TopRated/TopRatedPage";
 import LoginPage from "./Pages/AuthPages/LoginPage";
 import ErrorPage from "./Pages/Error/ErrorPage"
-import MoviePage from "./Pages/Movie/Extras/MoviePage";
+import MoviePage from "./Pages/Movie/MoviePage";
 
 function App() {
   return (

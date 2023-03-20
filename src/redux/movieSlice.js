@@ -12,6 +12,7 @@ export const movieSlice = createSlice({
     firstFetchTopRated: true,
     movie: [],
     movieTrailer:[],
+    movieFirstTrailer :[],
     movieCreditsDirectors: [],
     movieCreditsActors:[],
     shortDate: "",
@@ -23,21 +24,11 @@ export const movieSlice = createSlice({
   reducers: {},
   extraReducers: {
     [fetchMovieTrailer.fulfilled]:(state,action)=>{
-      action.payload.results.map((item)=>{
-        if(item.name === "Official Trailer") {
-        state.movieTrailer = item
-      }
-      })
-      
+      state.movieTrailer = action.payload
+      state.movieFirstTrailer = action.payload[0]
     },
     [fetchMovieCredits.fulfilled]: (state, action) => {
-      action.payload.cast.map((item) => {
-        if (item.known_for_department === "Directing") {
-          state.movieCreditsDirectors.push(item.name);
-        }else{
-          state.movieCreditsActors.push(item)
-        }
-      });
+      state.movieCreditsDirectors = action.payload.cast
     },
     [fetchMovie.fulfilled]: (state, action) => {
       state.movie = action.payload;
