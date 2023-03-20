@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 // Icon
 import { FaWalking } from "react-icons/fa";
 import { RiArrowDownCircleLine } from "react-icons/ri";
+import Loading from "../../components/Loading";
 
 function TopRatedPage() {
 
@@ -18,6 +19,7 @@ function TopRatedPage() {
   // Selectors
   const topRatedMovies = useSelector((state) => state.movies.topRatedMovies);
   let pageNumber = useSelector((state) => state.movies.pageNumber);
+  const status = useSelector((state)=>state.movies.status)
 
   // Page number changer func
   const handlePageNumber = () => {
@@ -25,8 +27,10 @@ function TopRatedPage() {
   };
 
   useEffect(() => {
-    dispatch(fetchTopRatedMovies());
-  }, [dispatch]);
+    if (status === "idle") {
+      dispatch(fetchTopRatedMovies());
+    }
+  }, [status]);
 
   return (
     <>
@@ -68,11 +72,13 @@ function TopRatedPage() {
           onClick={handlePageNumber}
           className="flex justify-center rounded-full bg-sky-500 hover:bg-slate-500 p-5 mb-5 mt-5"
         >
-          <p className="font-bold text-2xl">Load More Movies</p>
-          <RiArrowDownCircleLine className="w-10 h-10 ml-2" />
+          <p className="lg:contents hidden font-bold text-2xl">
+            Load More Movies
+          </p>
+          <RiArrowDownCircleLine className="w-10 h-10 lg:ml-2 ml-0" />
         </button>
       </div>
-
+      {status === "loading" && <Loading />}
       <Footer />
     </>
   );

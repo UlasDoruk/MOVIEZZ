@@ -2,7 +2,7 @@ import { AiOutlineSearch } from "react-icons/ai";
 
 function SearchBar() {
   return (
-    <div className="flex justify-center">
+    <div className=" justify-center">
       <input
         className="pl-3 font-mono text-black rounded"
         type={"text"}

@@ -37,18 +37,33 @@ export const movieSlice = createSlice({
     upcomingMovies: [],
     topRatedMovies: [],
     pageNumber: 1,
+    status: "idle",
+    firstFetchTopRated: true,
   },
   reducers: {},
   extraReducers: {
     [fetchPopularMovies.fulfilled]: (state, action) => {
+      state.status = "succeeded";
       state.popularMovies = action.payload;
     },
+    [fetchPopularMovies.pending]: (state, action) => {
+      state.status = "loading";
+    },
     [fetchUpcomingMovies.fulfilled]: (state, action) => {
+      state.status = "succeeded";
       state.upcomingMovies = action.payload;
     },
+    [fetchUpcomingMovies.pending]: (state, action) => {
+      state.status = "loading";
+    },
     [fetchTopRatedMovies.fulfilled]: (state, action) => {
+      state.status = "succeeded";
       state.pageNumber += 1;
+      state.firstFetchTopRated = false;
       state.topRatedMovies = [...state.topRatedMovies, ...action.payload];
+    },
+    [fetchTopRatedMovies.pending]: (state, action) => {
+      state.status = "loading";
     },
   },
 });
