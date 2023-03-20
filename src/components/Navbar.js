@@ -3,7 +3,7 @@ import SearchBar from "./SearchBar";
 
 // Redux
 import { useDispatch, useSelector } from "react-redux";
-import { fetchTopRatedMovies } from "../redux/movieSlice";
+import { fetchTopRatedMovies } from "../redux/fetchApı";
 
 // Icon
 import { BiCameraMovie } from "react-icons/bi";

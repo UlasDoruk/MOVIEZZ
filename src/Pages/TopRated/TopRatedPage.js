@@ -4,7 +4,7 @@ import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 
 // Redux
-import { fetchTopRatedMovies } from "../../redux/movieSlice";
+import { fetchTopRatedMovies } from "../../redux/fetchApı";
 import { useDispatch, useSelector } from "react-redux";
 
 // Icon
@@ -67,10 +67,10 @@ function TopRatedPage() {
           );
         })}
       </div>
-      <div className="flex justify-center text-white bg-slate-800 m-5 mt-0">
+      <div className="flex justify-center text-white  m-5 mt-0">
         <button
           onClick={handlePageNumber}
-          className="flex justify-center rounded-full bg-sky-500 hover:bg-slate-500 p-5 mb-5 mt-5"
+          className="flex justify-center rounded-full bg-sky-500 hover:bg-slate-900 p-5 mb-5 mt-5"
         >
           <p className="lg:contents hidden font-bold text-2xl">
             Load More Movies

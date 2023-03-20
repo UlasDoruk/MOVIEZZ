@@ -1,34 +1,5 @@
-import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-
-export const fetchTopRatedMovies = createAsyncThunk(
-  "movies/getTopRatedMovies",
-  async (page) => {
-    const res = await axios.get(
-      `${process.env.REACT_APP_API_BASE_ENDPOINT}/movie/top_rated?api_key=${process.env.REACT_APP_API_TOKEN}&language=en-US&page=${page}`
-    );
-    return res.data.results;
-  }
-);
-
-export const fetchPopularMovies = createAsyncThunk(
-  "movies/getPopularMovies",async () => {
-    const res = await axios.get(
-      `${process.env.REACT_APP_API_BASE_ENDPOINT}/movie/popular?api_key=${process.env.REACT_APP_API_TOKEN}&language=en-US&page=${1}`
-    );
-    return res.data.results;
-  }
-);
-
-export const fetchUpcomingMovies = createAsyncThunk(
-  "movies/getUpcomingMovies",
-  async (page) => {
-    const res = await axios.get(
-      `${process.env.REACT_APP_API_BASE_ENDPOINT}/movie/upcoming?api_key=${process.env.REACT_APP_API_TOKEN}&language=en-US&page=${page}`
-    );
-    return res.data.results;
-  }
-);
+import { createSlice } from "@reduxjs/toolkit";
+import { fetchMovie, fetchMovieCredits,fetchPopularMovies,fetchTopRatedMovies,fetchUpcomingMovies,fetchMovieTrailer} from "./fetchApı";
 
 export const movieSlice = createSlice({
   name: "movies",
@@ -39,9 +10,45 @@ export const movieSlice = createSlice({
     pageNumber: 1,
     status: "idle",
     firstFetchTopRated: true,
+    movie: [],
+    movieTrailer:[],
+    movieCreditsDirectors: [],
+    movieCreditsActors:[],
+    shortDate: "",
+    genres: [],
+    voteAverage: 0,
+    movieHour: 0,
+    movieMinute: 0,
   },
   reducers: {},
   extraReducers: {
+    [fetchMovieTrailer.fulfilled]:(state,action)=>{
+      action.payload.results.map((item)=>{
+        if(item.name === "Official Trailer") {
+        state.movieTrailer = item
+      }
+      })
+      
+    },
+    [fetchMovieCredits.fulfilled]: (state, action) => {
+      action.payload.cast.map((item) => {
+        if (item.known_for_department === "Directing") {
+          state.movieCreditsDirectors.push(item.name);
+        }else{
+          state.movieCreditsActors.push(item)
+        }
+      });
+    },
+    [fetchMovie.fulfilled]: (state, action) => {
+      state.movie = action.payload;
+      state.shortDate = action.payload.release_date.slice(0, 4);
+      state.genres = action.payload.genres.map((item) => {
+        return item.name;
+      });
+      state.voteAverage = action.payload.vote_average;
+      state.movieHour = Math.floor(action.payload.runtime / 60);
+      state.movieMinute = action.payload.runtime % (state.movieHour * 60);
+    },
     [fetchPopularMovies.fulfilled]: (state, action) => {
       state.status = "succeeded";
       state.popularMovies = action.payload;

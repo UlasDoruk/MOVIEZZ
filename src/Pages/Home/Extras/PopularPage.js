@@ -1,27 +1,38 @@
-import { fetchPopularMovies } from "../../../redux/movieSlice"
-import { useDispatch, useSelector } from "react-redux"
-import { useEffect } from "react"
-import { Link } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
+
+//Redux
+import {
+  fetchMovie,
+  fetchMovieCredits,
+  fetchPopularMovies,
+  fetchMovieTrailer,
+} from "../../../redux/fetchApı";
 
 // Icon
 import { FaWalking } from "react-icons/fa";
 
 // Swiper
 import { Swiper, SwiperSlide } from "swiper/react";
-import {Scrollbar } from "swiper";
+import { Scrollbar } from "swiper";
 import "swiper/css";
 import "swiper/css/scrollbar";
 
-
 function PopularPage() {
+  const dispatch = useDispatch();
 
-  const dispatch = useDispatch()
+  const popularMovies = useSelector((state) => state.movies.popularMovies);
 
-  const popularMovies = useSelector((state)=>state.movies.popularMovies)
+  const handleMovieID = (item_ID) => {
+    dispatch(fetchMovie(item_ID));
+    dispatch(fetchMovieCredits(item_ID));
+    dispatch(fetchMovieTrailer(item_ID));
+  };
 
-  useEffect(()=>{
-    dispatch(fetchPopularMovies())
-  },[dispatch])
+  useEffect(() => {
+    dispatch(fetchPopularMovies());
+  }, [dispatch]);
 
   return (
     <div className="">
@@ -30,6 +41,7 @@ function PopularPage() {
         spaceBetween={0}
         slidesPerView={5}
         onSwiper={""}
+        scrollbar={{ draggable: true, dragSize: 250 }}
       >
         {popularMovies.map((item) => {
           return (
@@ -38,7 +50,7 @@ function PopularPage() {
                 <div className="relative ">
                   <img
                     className=""
-                    src={`https://www.themoviedb.org/t/p/w400/${item.poster_path}`}
+                    src={`${process.env.REACT_APP_API_IMAGE}${item.poster_path}`}
                     alt=""
                   />
                   <div className="absolute lg:font-bold text-xs bg-sky-700 lg:rounded-full lg:mt-2 lg:mr-2 lg:p-2 p-1 text-white  -right-0 -top-0">
@@ -47,10 +59,13 @@ function PopularPage() {
                 </div>
 
                 <Link
-                  to={"/toprated"}
+                  to={`/movie/${item.id}`}
                   className="flex justify-around hover:bg-blue-500"
                 >
-                  <button className="text-white  p-2  flex justify-center lg:mr-5">
+                  <button
+                    onClick={() => handleMovieID(item.id)}
+                    className="text-white  p-2  flex justify-center lg:mr-5"
+                  >
                     <FaWalking className="lg:w-10 lg:h-10 w-5 h-5 lg:mr-14" />
                     <p className="hidden lg:block font-mono text-lg opacity-50 mt-1">
                       {item.release_date}
@@ -66,4 +81,4 @@ function PopularPage() {
   );
 }
 
-export default PopularPage
+export default PopularPage;
