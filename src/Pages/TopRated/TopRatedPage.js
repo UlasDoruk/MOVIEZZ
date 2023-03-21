@@ -82,7 +82,7 @@ function TopRatedPage() {
           );
         })}
       </div>
-      <div className="flex justify-center text-white  m-5 mt-0">
+      <div className="flex justify-center text-white mr-20 mb-5 ">
         <button
           onClick={handlePageNumber}
           className="flex justify-center rounded-full bg-sky-500 hover:bg-slate-900 p-5 mb-5 mt-5"
@@ -93,7 +93,9 @@ function TopRatedPage() {
           <RiArrowDownCircleLine className="w-10 h-10 lg:ml-2 ml-0" />
         </button>
       </div>
-      <Footer />
+      <div className="pr-5 pl-5 ">
+        <Footer />
+      </div>
     </>
   );
 }

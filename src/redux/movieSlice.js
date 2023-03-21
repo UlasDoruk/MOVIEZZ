@@ -1,5 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchMovie, fetchMovieCredits,fetchPopularMovies,fetchTopRatedMovies,fetchUpcomingMovies,fetchMovieTrailer} from "./fetchApı";
+import { fetchMovie,
+  fetchMovieCredits,
+  fetchPopularMovies,
+  fetchTopRatedMovies,
+  fetchUpcomingMovies,
+  fetchMovieTrailer,
+  fetchSimilarMovies
+} from "./fetchApı";
 
 export const movieSlice = createSlice({
   name: "movies",
@@ -11,25 +18,39 @@ export const movieSlice = createSlice({
     status: "idle",
     firstFetchTopRated: true,
     movie: [],
-    movieTrailer:[],
-    movieFirstTrailer :[],
+    movieTrailer: [],
+    movieFirstTrailer: [],
     movieCreditsDirectors: [],
-    movieCreditsActors:[],
+    movieCreditsActors: [],
+    similarMovies:[],
     shortDate: "",
     genres: [],
     voteAverage: 0,
     movieHour: 0,
     movieMinute: 0,
+    openSection : false,
   },
-  reducers: {},
+  reducers: {
+    openTheSection :(state,action)=>{
+      if(state.openSection === true){
+        state.openSection = false
+      }else{
+        state.openSection = true
+      }}
+  },
   extraReducers: {
-    [fetchMovieTrailer.fulfilled]:(state,action)=>{
-      state.movieTrailer = action.payload
-      state.movieFirstTrailer = action.payload[0]
+    [fetchSimilarMovies.fulfilled]: (state, action) => {
+      state.similarMovies = action.payload
+    },
+    [fetchMovieTrailer.fulfilled]: (state, action) => {
+      state.movieTrailer = action.payload;
+      state.movieFirstTrailer = action.payload[0];
     },
     [fetchMovieCredits.fulfilled]: (state, action) => {
-      state.movieCreditsDirectors = action.payload.cast
-      state.movieCreditsActors =  action.payload.cast.filter((e) => e.known_for_department === "Acting")
+      state.movieCreditsDirectors = action.payload.cast;
+      state.movieCreditsActors = action.payload.cast.filter(
+        (e) => e.known_for_department === "Acting"
+      );
     },
     [fetchMovie.fulfilled]: (state, action) => {
       state.movie = action.payload;
@@ -67,4 +88,5 @@ export const movieSlice = createSlice({
   },
 });
 
+export const { openTheSection } = movieSlice.actions;
 export default movieSlice.reducer

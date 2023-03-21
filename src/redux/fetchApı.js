@@ -1,6 +1,16 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
+export const fetchSimilarMovies = createAsyncThunk(
+  "movies/getSimilarMovies",
+  async (id) => {
+    const res = await axios.get(
+      `${process.env.REACT_APP_API_BASE_ENDPOINT}/movie/${id}/similar?api_key=${process.env.REACT_APP_API_TOKEN}&language=en-US`
+    );
+    return res.data.results;
+  }
+);
+
 export const fetchMovieTrailer = createAsyncThunk(
   "movies/getMovieTrailer",
   async (id) => {

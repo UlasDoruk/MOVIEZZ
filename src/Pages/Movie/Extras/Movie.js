@@ -1,4 +1,5 @@
-import { useSelector } from 'react-redux'
+// Redux
+import { useSelector} from 'react-redux'
 
 // Icon
 import {AiFillHeart} from "react-icons/ai"
@@ -6,7 +7,7 @@ import { MdOutlineVideoLibrary } from "react-icons/md";
 
 function Movie() {
 
-  let isOffical = true
+  let isThereOfficalTrailer = true
 
   // Selectors
   const movie = useSelector((state)=>state.movies.movie)
@@ -32,7 +33,11 @@ function Movie() {
       <div className="flex justify-start">
         <img
           className=" rounded-3xl p-5 lg:pl-20"
-          src={`${process.env.REACT_APP_API_IMAGE}${movie.poster_path}`}
+          src={
+            movie.poster_path
+              ? `${process.env.REACT_APP_API_IMAGE}${movie.poster_path}`
+              : "https://pbs.twimg.com/profile_images/1243623122089041920/gVZIvphd_400x400.jpg"
+          }
         ></img>
         <div className="font-bold text-white p-10">
           <div className="flex justify-start pb-5">
@@ -68,7 +73,7 @@ function Movie() {
             </button>
             {movieTrailer.map((item, index) => {
               if (item.name === "Official Trailer") {
-                isOffical = false;
+                isThereOfficalTrailer = false;
                 return (
                   <a
                     key={index}
@@ -82,7 +87,7 @@ function Movie() {
                 );
               }
             })}
-            {isOffical && (
+            {isThereOfficalTrailer && movieFirstTrailer && (
               <a
                 target={"_blank"}
                 href={`https://www.youtube.com/watch?v=${movieFirstTrailer.key}`}

@@ -5,12 +5,12 @@ import { GiMountains } from "react-icons/gi";
 
 function TitleBar(props) {
   return (
-    <div className="flex justify-center text-black p-2  opacity-30">
-      <h1 className="font-mono text-2xl ">{props.title}</h1>
+    <div className="flex justify-center text-black lg:ml-20 ml-0 mt-2 mb-3 opacity-30">
+      <h1 className="font-mono lg:text-2xl text-base mr-2">{props.title}</h1>
       {props.title === "Popular Movies" ? (
-        <GiMountains className="w-8 h-8 ml-5" />
+        <GiMountains className="lg:w-8 lg:h-8 w-6 h-6 ml-5" />
       ) : (
-        <BsClockHistory className="w-8 h-8 ml-5" />
+        <BsClockHistory className="lg:w-8 lg:h-8 w-6 h-6 ml-5" />
       )}
     </div>
   );

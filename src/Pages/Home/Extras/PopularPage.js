@@ -8,6 +8,7 @@ import {
   fetchMovieCredits,
   fetchPopularMovies,
   fetchMovieTrailer,
+  fetchSimilarMovies
 } from "../../../redux/fetchApı";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -21,6 +22,7 @@ import "swiper/css";
 import "swiper/css/scrollbar";
 
 function PopularPage() {
+  
   const dispatch = useDispatch();
 
   const popularMovies = useSelector((state) => state.movies.popularMovies);
@@ -30,6 +32,7 @@ function PopularPage() {
     dispatch(fetchMovie(item_ID));
     dispatch(fetchMovieCredits(item_ID));
     dispatch(fetchMovieTrailer(item_ID));
+    dispatch(fetchSimilarMovies(item_ID))
   };
 
   useEffect(() => {

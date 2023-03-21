@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import SearchBar from "./SearchBar";
+import { Dropdown } from "flowbite-react";
 
 // Redux
 import { useDispatch, useSelector } from "react-redux";
@@ -23,26 +24,43 @@ function Navbar() {
     };
 
   return (
-    <div className="flex justify-between font-bold lg:text-2xl text-sm bg-gray-900 top-0 text-white p-3">
+    <div className="flex justify-between font-bold  lg:text-2xl text-sm bg-gray-900 top-0 text-white lg:p-3 p-1">
       <Link to={"/"}>
-        <p className="flex justify-center hover:scale-110 mt-1">
-          MOVIEZZ <BiCameraMovie className="mt-1 ml-2" />
+        <p className="flex justify-center lg:hover:scale-110 underline lg:no-underline hover:decoration-white decoration-transparent mt-1">
+          <span className="lg:contents hidden">MOVIEZZ</span>
+          <BiCameraMovie className="mt-1 ml-2" />
         </p>
       </Link>
-      <div className="flex justify-center space-x-5 ml-2 lg:ml-36">
-        <Link to={"/toprated"}>
-          <p
-            onClick={handleFirstFetchTopRated}
-            className="hover:scale-110 uppercase"
-          >
-            Top Rated
-          </p>
-        </Link>
-        <Link to={"/login"}>
-          <p className="hover:scale-110 uppercase">Login</p>
-        </Link>
+      <SearchBar />
+      <div className="p-2">
+        <Dropdown
+          label={""}
+          color={"blue"}
+          dismissOnClick={true}
+          inline={true}
+          size="sm"
+        >
+          <Dropdown.Item>
+            {
+              <Link to={"/toprated"}>
+                <p
+                  onClick={handleFirstFetchTopRated}
+                  className="hover:scale-110"
+                >
+                  Top Rated
+                </p>
+              </Link>
+            }
+          </Dropdown.Item>
+          <Dropdown.Item>
+            {
+              <Link to={"/login"}>
+                <p className="hover:scale-110 ">Login</p>
+              </Link>
+            }
+          </Dropdown.Item>
+        </Dropdown>
       </div>
-      <SearchBar className="hidden" />
     </div>
   );
 }
