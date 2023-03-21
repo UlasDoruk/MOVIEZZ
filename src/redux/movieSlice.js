@@ -29,6 +29,7 @@ export const movieSlice = createSlice({
     },
     [fetchMovieCredits.fulfilled]: (state, action) => {
       state.movieCreditsDirectors = action.payload.cast
+      state.movieCreditsActors =  action.payload.cast.filter((e) => e.known_for_department === "Acting")
     },
     [fetchMovie.fulfilled]: (state, action) => {
       state.movie = action.payload;

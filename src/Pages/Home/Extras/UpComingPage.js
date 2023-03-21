@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import Loading from "../../../components/Loading";
 
 //Redux
 import {
@@ -22,7 +23,9 @@ import "swiper/css/scrollbar";
 function UpComingPage() {
   const dispatch = useDispatch();
 
+  // Selectors
   const upcomingMovies = useSelector((state) => state.movies.upcomingMovies);
+  const status = useSelector((state) => state.movies.status);
 
   const handleMovieID = (item_ID) => {
     dispatch(fetchMovie(item_ID));
@@ -36,6 +39,7 @@ function UpComingPage() {
 
   return (
     <div className="">
+      {status === "loading" && <Loading />}
       <Swiper
         modules={[Scrollbar]}
         spaceBetween={0}
@@ -46,7 +50,7 @@ function UpComingPage() {
         {upcomingMovies.map((item) => {
           return (
             <SwiperSlide key={item.id}>
-              <div className="max-w-sm shadow bg-gray-800 ">
+              <div className="max-w-sm shadow bg-gray-800 mb-5">
                 <div className="relative ">
                   <img
                     className=""

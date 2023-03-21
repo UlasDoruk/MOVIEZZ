@@ -1,4 +1,3 @@
-import React from 'react'
 import { useSelector } from 'react-redux'
 
 // Icon
@@ -17,7 +16,6 @@ function Movie() {
   const movieHour = useSelector((state) => state.movies.movieHour);
   const movieMinute = useSelector((state) => state.movies.movieMinute);
   const movieCreditsDirectors = useSelector((state) => state.movies.movieCreditsDirectors);
-  const movieCreditsActors = useSelector((state) => state.movies.movieCreditsActors);
   const movieTrailer = useSelector((state) => state.movies.movieTrailer);
   const movieFirstTrailer = useSelector((state) => state.movies.movieFirstTrailer);
 

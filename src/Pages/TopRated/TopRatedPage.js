@@ -46,6 +46,7 @@ function TopRatedPage() {
   return (
     <>
       <Navbar />
+      {status === "loading" && <Loading />}
       <div className="lg:grid lg:grid-cols-2 flex-wrap p-5 pb-0">
         {topRatedMovies.map((item) => {
           return (
@@ -92,7 +93,6 @@ function TopRatedPage() {
           <RiArrowDownCircleLine className="w-10 h-10 lg:ml-2 ml-0" />
         </button>
       </div>
-      {status === "loading" && <Loading />}
       <Footer />
     </>
   );

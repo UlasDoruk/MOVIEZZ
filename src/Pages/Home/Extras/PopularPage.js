@@ -1,6 +1,6 @@
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import Loading from "../../../components/Loading";
 
 //Redux
 import {
@@ -9,6 +9,7 @@ import {
   fetchPopularMovies,
   fetchMovieTrailer,
 } from "../../../redux/fetchApı";
+import { useDispatch, useSelector } from "react-redux";
 
 // Icon
 import { FaWalking } from "react-icons/fa";
@@ -23,6 +24,7 @@ function PopularPage() {
   const dispatch = useDispatch();
 
   const popularMovies = useSelector((state) => state.movies.popularMovies);
+  const status = useSelector((state) => state.movies.status);
 
   const handleMovieID = (item_ID) => {
     dispatch(fetchMovie(item_ID));
@@ -36,6 +38,7 @@ function PopularPage() {
 
   return (
     <div className="">
+      {status === "loading" && <Loading />}
       <Swiper
         modules={[Scrollbar]}
         spaceBetween={0}
@@ -46,7 +49,7 @@ function PopularPage() {
         {popularMovies.map((item) => {
           return (
             <SwiperSlide key={item.id}>
-              <div className="max-w-sm shadow bg-gray-800 ">
+              <div className="max-w-sm shadow bg-gray-800 mb-5">
                 <div className="relative ">
                   <img
                     className=""
