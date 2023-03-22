@@ -5,6 +5,7 @@ import TopRatedPage from "./Pages/TopRated/TopRatedPage";
 import LoginPage from "./Pages/AuthPages/LoginPage";
 import ErrorPage from "./Pages/Error/ErrorPage"
 import MoviePage from "./Pages/Movie/MoviePage";
+import RegisterPage from "./Pages/AuthPages/RegisterPage";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/toprated" element={<TopRatedPage />}></Route>
         <Route path="/login" element={<LoginPage />}></Route>
         <Route path="/movie/:movie_id" element={<MoviePage />}></Route>
+        <Route path="/register" element={<RegisterPage />}></Route>
         <Route path="/*" element={<ErrorPage />}></Route>
       </Routes>
     </div>

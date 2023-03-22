@@ -14,7 +14,9 @@ function MoviePage() {
       <div className="lg:pr-20 lg:pl-20 pl-5 pr-5">
         <MovieCredits />
         <SimilarRecoButton />
-        <Footer />
+        <div className="pr-5 pl-5 pb-5">
+          <Footer />
+        </div>
       </div>
     </div>
   );

@@ -86,10 +86,10 @@ function TopRatedPage() {
           );
         })}
       </div>
-      <div className="flex justify-center text-white lg:mr-20 mb-5 ">
+      <div className="flex justify-center text-white mb-5 ">
         <button
           onClick={handlePageNumber}
-          className="flex justify-center rounded-full bg-sky-500 hover:bg-slate-900 p-5 mb-5 mt-5"
+          className="flex justify-center rounded-lg  hover:bg-sky-900 w-1/2 bg-slate-800 p-5 mb-5 mt-5"
         >
           <p className="lg:contents hidden font-bold text-2xl">
             Load More Movies
@@ -97,7 +97,7 @@ function TopRatedPage() {
           <RiArrowDownCircleLine className="w-10 h-10 lg:ml-2 ml-0" />
         </button>
       </div>
-      <div className="pr-5 pl-5 ">
+      <div className="pr-5 pl-5 pb-5">
         <Footer />
       </div>
     </>

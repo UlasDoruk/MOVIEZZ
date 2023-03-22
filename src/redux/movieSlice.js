@@ -42,11 +42,9 @@ export const movieSlice = createSlice({
   },
   extraReducers: {
     [fetchSimilarMovies.fulfilled]: (state, action) => {
-      console.log(action.payload)
       state.similarMovies = action.payload;
     },
     [fetchRecommendedMovies.fulfilled]: (state, action) => {
-      console.log("hi");
       state.recommendedMovies = action.payload;
     },
     [fetchMovieTrailer.fulfilled]: (state, action) => {

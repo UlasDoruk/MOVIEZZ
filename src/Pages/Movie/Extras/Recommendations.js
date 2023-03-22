@@ -21,7 +21,7 @@ import "swiper/css";
 import "swiper/css/scrollbar";
 
 function Recommendations() {
-  
+
   const dispatch = useDispatch();
 
   const recommendedMovies = useSelector(

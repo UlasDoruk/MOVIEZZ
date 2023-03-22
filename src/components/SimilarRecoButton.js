@@ -29,7 +29,7 @@ function SimilarRecoButton() {
           <>
             <TitleBar title="Similar Movies" />
             <SimilarMovie />
-            <TitleBar title="Recommended Movies" />
+            <TitleBar title="Recommended Movies"/>
             <Recommendations />
           </>
         )}
