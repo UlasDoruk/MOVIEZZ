@@ -82,7 +82,7 @@ function TopRatedPage() {
           );
         })}
       </div>
-      <div className="flex justify-center text-white mr-20 mb-5 ">
+      <div className="flex justify-center text-white lg:mr-20 mb-5 ">
         <button
           onClick={handlePageNumber}
           className="flex justify-center rounded-full bg-sky-500 hover:bg-slate-900 p-5 mb-5 mt-5"

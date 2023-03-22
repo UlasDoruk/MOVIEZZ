@@ -17,7 +17,7 @@ function SearchBar() {
       <div className="relative">
         <input
           type="text"
-          className="  lg:w-96 w-full lg:p-4 p-2  text-sm text-gray-900  rounded"
+          className="  lg:w-96 w-full lg:p-4 p-2 lg:ml-20 ml-2 text-sm text-gray-900  rounded"
           placeholder="Search a Movie"
           required
         ></input>

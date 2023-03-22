@@ -40,7 +40,7 @@ function PopularPage() {
   }, [dispatch]);
 
   return (
-    <div className="">
+    <div className="mb-10">
       {status === "loading" && <Loading />}
       <Swiper
         modules={[Scrollbar]}

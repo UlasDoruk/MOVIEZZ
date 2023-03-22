@@ -32,12 +32,25 @@ function Navbar() {
         </p>
       </Link>
       <SearchBar />
-      <div className="p-2">
+      <div className="justify-center  lg:flex hidden p-2 pt-1">
+        <Link to={"/toprated"}>
+          <p
+            onClick={handleFirstFetchTopRated}
+            className="hover:underline mr-5"
+          >
+            Top Rated
+          </p>
+        </Link>
+        <Link to={"/login"}>
+          <p className="hover:underline mr-5">Login</p>
+        </Link>
+      </div>
+      <div className="flex items-center lg:hidden ">
         <Dropdown
           label={""}
           color={"blue"}
-          dismissOnClick={true}
-          inline={true}
+          dismissOnClick={false}
+          inline={false}
           size="sm"
         >
           <Dropdown.Item>
