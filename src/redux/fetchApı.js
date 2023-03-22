@@ -11,6 +11,16 @@ export const fetchSimilarMovies = createAsyncThunk(
   }
 );
 
+export const fetchRecommendedMovies = createAsyncThunk(
+  "movies/getRecommendedMovies",
+  async (id) => {
+    const res = await axios.get(
+      `${process.env.REACT_APP_API_BASE_ENDPOINT}/movie/${id}/recommendations?api_key=${process.env.REACT_APP_API_TOKEN}&language=en-US`
+    );
+    return res.data.results;
+  }
+);
+
 export const fetchMovieTrailer = createAsyncThunk(
   "movies/getMovieTrailer",
   async (id) => {

@@ -1,7 +1,7 @@
 
 function Footer() {
   return (
-    <div className="bg-slate-900 text-white bottom-0 lg:static  w-full font-bold  flex justify-center lg:text-2xl text-sm mt-5 mb-2 ">
+    <div className="bg-slate-900 text-white bottom-0 w-full font-bold  flex justify-center lg:text-2xl text-sm mt-10 mb-2">
       <a
         className="m-2"
         href="https://developers.themoviedb.org/3/getting-started"

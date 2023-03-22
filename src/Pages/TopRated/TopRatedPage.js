@@ -9,6 +9,8 @@ import {
   fetchMovie,
   fetchMovieCredits,
   fetchMovieTrailer,
+  fetchSimilarMovies,
+  fetchRecommendedMovies
 } from "../../redux/fetchApı";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -35,6 +37,8 @@ function TopRatedPage() {
     dispatch(fetchMovie(item_ID));
     dispatch(fetchMovieCredits(item_ID));
     dispatch(fetchMovieTrailer(item_ID));
+    dispatch(fetchSimilarMovies(item_ID))
+    dispatch(fetchRecommendedMovies(item_ID));
   };
 
   useEffect(() => {

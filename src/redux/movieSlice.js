@@ -1,11 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchMovie,
+import {
+  fetchMovie,
   fetchMovieCredits,
   fetchPopularMovies,
   fetchTopRatedMovies,
   fetchUpcomingMovies,
   fetchMovieTrailer,
-  fetchSimilarMovies
+  fetchSimilarMovies,
+  fetchRecommendedMovies,
 } from "./fetchApı";
 
 export const movieSlice = createSlice({
@@ -22,25 +24,30 @@ export const movieSlice = createSlice({
     movieFirstTrailer: [],
     movieCreditsDirectors: [],
     movieCreditsActors: [],
-    similarMovies:[],
+    similarMovies: [],
+    recommendedMovies: [],
     shortDate: "",
     genres: [],
     voteAverage: 0,
     movieHour: 0,
     movieMinute: 0,
-    openSection : false,
+    openSection: false,
   },
   reducers: {
-    openTheSection :(state,action)=>{
-      if(state.openSection === true){
-        state.openSection = false
-      }else{
-        state.openSection = true
-      }}
+    openTheSection: (state, action) => {
+      state.openSection
+        ? (state.openSection = false)
+        : (state.openSection = true);
+    },
   },
   extraReducers: {
     [fetchSimilarMovies.fulfilled]: (state, action) => {
-      state.similarMovies = action.payload
+      console.log(action.payload)
+      state.similarMovies = action.payload;
+    },
+    [fetchRecommendedMovies.fulfilled]: (state, action) => {
+      console.log("hi");
+      state.recommendedMovies = action.payload;
     },
     [fetchMovieTrailer.fulfilled]: (state, action) => {
       state.movieTrailer = action.payload;

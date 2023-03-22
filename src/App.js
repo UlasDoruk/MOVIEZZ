@@ -8,7 +8,7 @@ import MoviePage from "./Pages/Movie/MoviePage";
 
 function App() {
   return (
-    <div className="App h-screen w-screen">
+    <div className="App h-screen">
       <Routes>
         <Route path="/" element={<HomePage />}></Route>
         <Route path="/toprated" element={<TopRatedPage />}></Route>

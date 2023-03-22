@@ -8,7 +8,8 @@ import {
   fetchMovieCredits,
   fetchPopularMovies,
   fetchMovieTrailer,
-  fetchSimilarMovies
+  fetchSimilarMovies,
+  fetchRecommendedMovies
 } from "../../../redux/fetchApı";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -33,6 +34,7 @@ function PopularPage() {
     dispatch(fetchMovieCredits(item_ID));
     dispatch(fetchMovieTrailer(item_ID));
     dispatch(fetchSimilarMovies(item_ID))
+    dispatch(fetchRecommendedMovies(item_ID))
   };
 
   useEffect(() => {

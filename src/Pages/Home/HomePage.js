@@ -8,7 +8,7 @@ function HomePage() {
   return (
     <>
       <Navbar />
-      <div className="lg:p-5 p-1 mt-0">
+      <div className="lg:p-5 p-1">
         <TitleBar title="Popular Movies" />
         <PopularPage />
         <TitleBar title="Up Coming Movies" />
