@@ -73,7 +73,7 @@ function Movie() {
             >
               {voteAverage.toString().slice(0, 3)}
             </p>
-            <button className="lg:bg-red-900  lg:p-2 p-0 lg:ml-5 ml-1 lg:mt-1 lg:rounded-full  lg:hover:bg-amber-500">
+            <button className="lg:bg-red-900  lg:p-2 p-0 lg:ml-5 ml-1 lg:rounded-full  lg:hover:bg-amber-500">
               <AiFillHeart className="h-5 w-5" fill="red" />
             </button>
             {movieTrailer.map((item, index) => {

@@ -1,33 +1,57 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
+
+// Redux
+import { useDispatch,useSelector } from "react-redux";
+import { fetchSearchedMovies } from "../redux/fetchApı";
+
+// Icon
 import { AiOutlineSearch } from "react-icons/ai";
 
+// Toastify
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+
 function SearchBar() {
+
+  let dispatch =useDispatch()
+
+  const status = useSelector((state) => state.movies.status);
+
+  const [input,setInput] = useState("")
+  
+  const handleInput =()=>{
+    if(input === "" ){
+      toast.warn("Empty Search",{position:toast.POSITION.TOP_LEFT});
+    }else{
+      dispatch(fetchSearchedMovies(input))
+      setInput("")
+    }}
+
   return (
-    // <div className="flex justify-center ">
-    //   <input
-    //     className="lg:pl-3 pl-1 font-mono lg:font-bold font-extralight text-black rounded "
-    //     type={"text"}
-    //     placeholder="Search a Movie"
-    //   ></input>
-    //   <button type="submit" className="lg:ml-5 ml-1 hover:scale-125 ">
-    //     <AiOutlineSearch />
-    //   </button>
-    // </div>
-    <div>
-      {/* <label htmlFor="default-search" className="mb-2 text-sm font-bold text-gray-900 sr-only">Search</label> */}
+    <form onSubmit={handleInput}>
       <div className="relative">
         <input
+          value={input}
           type="text"
           className="  lg:w-96 w-full lg:p-4 p-2 lg:ml-20 ml-2 text-sm text-gray-900  rounded"
           placeholder="Search a Movie"
           required
+          onChange={(e) => setInput(e.target.value)}
         ></input>
-        <button
-          type="submit"
-          className="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 rounded lg:px-4 px-2 lg:py-2 py-0 ">
-          <AiOutlineSearch className="w-5 h-5" />
-        </button>
+        <Link to={input && "/search"}>
+          <button
+            type="submit"
+            className="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 rounded lg:px-4 px-2 lg:py-2 py-0 "
+            onClick={() => handleInput()}
+          >
+            <AiOutlineSearch className="w-5 h-5" />
+          </button>
+        </Link>
       </div>
-    </div>
+      <ToastContainer autoClose={2000} limit={3} />
+    </form>
   );
 }
 

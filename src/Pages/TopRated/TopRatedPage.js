@@ -60,6 +60,7 @@ function TopRatedPage() {
             <div key={item.id} className="flex">
               <div className="max-w-sm flex p-2 bg-slate-100">
                 <Card
+                  className="bg-slate-50"
                   imgSrc={`${process.env.REACT_APP_API_IMAGE}${item.poster_path}`}
                 >
                   <h5 className="text-2xl  font-bold lg:text-center  text-gray-900">
@@ -67,16 +68,16 @@ function TopRatedPage() {
                   </h5>
                   <div className="flex justify-between">
                     <span className="rounded bg-red-800 text-white p-2">
-                      {item.vote_average}
+                      {item.vote_average.toString().slice(0, 3)}
                     </span>
                     <span className="font-mono text-lg mt-2 flex justify-center">
                       <AiOutlineCalendar className="mt-1 mr-1" />
                       {item.release_date}
                     </span>
                   </div>
-                    <span className=" font-normal text-gray-700 flex-1 text-justify lg:flex hidden rounded py-2 ">
-                      {item.overview}
-                    </span>
+                  <span className=" font-normal text-gray-700 flex-1 text-justify lg:flex hidden rounded py-2 ">
+                    {item.overview}
+                  </span>
                   <Link
                     to={`/movie/${item.id}`}
                     className="text-white  p-2 flex justify-center bottom-0 bg-sky-700 hover:bg-sky-900"

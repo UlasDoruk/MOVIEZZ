@@ -1,6 +1,16 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
+export const fetchSearchedMovies = createAsyncThunk(
+  "movies/getSearchedMovies",
+  async (search) => {
+    const res = await axios.get(
+      `${process.env.REACT_APP_API_BASE_ENDPOINT}/search/movie?api_key=${process.env.REACT_APP_API_TOKEN}&language=en-US&query=${search}`
+    );
+    return res.data.results
+  }
+);
+
 export const fetchSimilarMovies = createAsyncThunk(
   "movies/getSimilarMovies",
   async (id) => {

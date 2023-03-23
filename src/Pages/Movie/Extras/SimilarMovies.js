@@ -10,10 +10,6 @@ import {
 } from "../../../redux/fetchApı";
 import { useSelector, useDispatch } from "react-redux";
 
-// Tooltip
-import { Tooltip } from "react-tooltip";
-import "react-tooltip/dist/react-tooltip.css";
-
 // Swiper
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Scrollbar } from "swiper";
@@ -70,21 +66,6 @@ function SimilarMovies() {
                   </div>
                 </div>
               </Link>
-              {/* <Tooltip id="tooltip">
-                <Link
-                  to={`/movie/${item.id}`}
-                  className="flex justify-around hover:bg-blue-500"
-                >
-                  <button
-                    onClick={() => handleMovieID(item.id)}
-                    className="text-white  p-2  flex justify-center lg:mr-5"
-                  >
-                    <p className="hidden lg:block font-mono text-lg opacity-50 mt-1">
-                      {item.release_date}
-                    </p>
-                  </button>
-                </Link>
-              </Tooltip> */}
             </SwiperSlide>
           );
         })}

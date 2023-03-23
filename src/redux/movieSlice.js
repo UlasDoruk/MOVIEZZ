@@ -8,6 +8,7 @@ import {
   fetchMovieTrailer,
   fetchSimilarMovies,
   fetchRecommendedMovies,
+  fetchSearchedMovies,
 } from "./fetchApı";
 
 export const movieSlice = createSlice({
@@ -20,6 +21,7 @@ export const movieSlice = createSlice({
     status: "idle",
     firstFetchTopRated: true,
     movie: [],
+    searchedMovies: [],
     movieTrailer: [],
     movieFirstTrailer: [],
     movieCreditsDirectors: [],
@@ -41,6 +43,12 @@ export const movieSlice = createSlice({
     },
   },
   extraReducers: {
+    [fetchSearchedMovies.fulfilled]: (state, action) => {
+      state.searchedMovies = action.payload.filter((e) => e.poster_path);
+    },
+    [fetchSearchedMovies.pending]: (state) => {
+      state.status = "loading";
+    },
     [fetchSimilarMovies.fulfilled]: (state, action) => {
       state.similarMovies = action.payload;
     },
@@ -54,7 +62,7 @@ export const movieSlice = createSlice({
     [fetchMovieCredits.fulfilled]: (state, action) => {
       state.movieCreditsDirectors = action.payload.cast;
       state.movieCreditsActors = action.payload.cast.filter(
-        (e) => e.known_for_department === "Acting"
+        (e) => e.known_for_department === "Acting" && e.profile_path
       );
     },
     [fetchMovie.fulfilled]: (state, action) => {
@@ -71,14 +79,14 @@ export const movieSlice = createSlice({
       state.status = "succeeded";
       state.popularMovies = action.payload;
     },
-    [fetchPopularMovies.pending]: (state, action) => {
+    [fetchPopularMovies.pending]: (state) => {
       state.status = "loading";
     },
     [fetchUpcomingMovies.fulfilled]: (state, action) => {
       state.status = "succeeded";
       state.upcomingMovies = action.payload;
     },
-    [fetchUpcomingMovies.pending]: (state, action) => {
+    [fetchUpcomingMovies.pending]: (state) => {
       state.status = "loading";
     },
     [fetchTopRatedMovies.fulfilled]: (state, action) => {
@@ -87,7 +95,7 @@ export const movieSlice = createSlice({
       state.firstFetchTopRated = false;
       state.topRatedMovies = [...state.topRatedMovies, ...action.payload];
     },
-    [fetchTopRatedMovies.pending]: (state, action) => {
+    [fetchTopRatedMovies.pending]: (state) => {
       state.status = "loading";
     },
   },

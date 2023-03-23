@@ -10,10 +10,6 @@ import {
 } from "../../../redux/fetchApı";
 import { useSelector, useDispatch } from "react-redux";
 
-// Tooltip
-import { Tooltip } from "react-tooltip";
-import "react-tooltip/dist/react-tooltip.css";
-
 // Swiper
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Scrollbar } from "swiper";
