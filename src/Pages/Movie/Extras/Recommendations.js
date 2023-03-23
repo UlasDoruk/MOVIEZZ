@@ -28,8 +28,6 @@ function Recommendations() {
     (state) => state.movies.recommendedMovies
   );
 
-  console.log(recommendedMovies);
-
   const handleMovieID = (item_ID) => {
     dispatch(fetchMovie(item_ID));
     dispatch(fetchMovieCredits(item_ID));

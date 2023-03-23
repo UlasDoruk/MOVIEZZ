@@ -1,7 +1,9 @@
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
+import Loading from "../../components/Loading";
+import { Card } from "flowbite-react";
+import { Link } from "react-router-dom";
 
 // Redux
 import {
@@ -17,7 +19,8 @@ import { useDispatch, useSelector } from "react-redux";
 // Icon
 import { FaWalking } from "react-icons/fa";
 import { RiArrowDownCircleLine } from "react-icons/ri";
-import Loading from "../../components/Loading";
+import {AiOutlineCalendar} from "react-icons/ai"
+ 
 
 function TopRatedPage() {
 
@@ -51,36 +54,38 @@ function TopRatedPage() {
     <>
       <Navbar />
       {status === "loading" && <Loading />}
-      <div className="lg:grid lg:grid-cols-2 flex-wrap p-5 pb-0">
+      <div className="lg:grid lg:grid-cols-5 flex flex-wrap p-5">
         {topRatedMovies.map((item) => {
           return (
-            <div key={item.id} className="flex relative  bg-slate-800 ">
-              <img
-                className="bg-white border-b-2 border-b-gray-900"
-                src={`https://www.themoviedb.org/t/p/w400/${item.poster_path}`}
-                alt=""
-              ></img>
-              <div className="absolute lg:font-bold lg:text-xl text-xs bg-red-700 rounded-full mt-2 ml-2 p-2  text-white  -left-0 -top-0">
-                {item.vote_average}
-              </div>
-              <div className="p-5">
-                <div className="font-bold text-left flex justify-between text-white">
-                  <h5 className="mb-2 text-2xl w-1/2">{item.original_title}</h5>
-                  <p className="font-mono text-base mt-2">
-                    {item.release_date}
-                  </p>
-                </div>
-                <p className="mb-3  mt-5 font-bold text-2xl text-justify  text-white opacity-50">
-                  {item.overview}
-                </p>
-                <Link to={`/movie/${item.id}`} className="flex justify-center ">
-                  <button
-                    onClick={() => handleMovieID(item.id)}
-                    className="text-white  p-2 absolute  w-1/2 flex justify-center bottom-0 bg-sky-400 hover:bg-sky-800"
+            <div key={item.id} className="flex ">
+              <div className="max-w-sm flex p-2 bg-slate-100">
+                <Card
+                  imgSrc={`${process.env.REACT_APP_API_IMAGE}${item.poster_path}`}
+                >
+                  <h5 className="text-2xl font-bold tracking-tight text-gray-900">
+                    {item.original_title}
+                  </h5>
+                  <div className="flex justify-between">
+                    <span className="rounded bg-red-800 text-white p-2">
+                      {item.vote_average}
+                    </span>
+                    <span className="font-mono text-base mt-2 flex justify-center">
+                      <AiOutlineCalendar className="mt-1 mr-1" />
+                      {item.release_date}
+                    </span>
+                  </div>
+                    <span className=" font-normal text-gray-700 flex-1 text-justify lg:flex hidden rounded py-2 ">
+                      {item.overview}
+                    </span>
+                  <Link
+                    to={`/movie/${item.id}`}
+                    className="text-white  p-2 flex justify-center bottom-0 bg-sky-700 hover:bg-sky-900"
                   >
-                    <FaWalking className="lg:w-10 lg:h-10 w-5 h-5 " />
-                  </button>
-                </Link>
+                    <button onClick={() => handleMovieID(item.id)} className="">
+                      <FaWalking className="lg:w-10 lg:h-10 w-5 h-5 hover:pl-3" />
+                    </button>
+                  </Link>
+                </Card>
               </div>
             </div>
           );
