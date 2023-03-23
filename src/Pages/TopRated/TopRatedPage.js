@@ -57,19 +57,19 @@ function TopRatedPage() {
       <div className="lg:grid lg:grid-cols-5 flex flex-wrap p-5">
         {topRatedMovies.map((item) => {
           return (
-            <div key={item.id} className="flex ">
+            <div key={item.id} className="flex">
               <div className="max-w-sm flex p-2 bg-slate-100">
                 <Card
                   imgSrc={`${process.env.REACT_APP_API_IMAGE}${item.poster_path}`}
                 >
-                  <h5 className="text-2xl font-bold tracking-tight text-gray-900">
+                  <h5 className="text-2xl  font-bold lg:text-center  text-gray-900">
                     {item.original_title}
                   </h5>
                   <div className="flex justify-between">
                     <span className="rounded bg-red-800 text-white p-2">
                       {item.vote_average}
                     </span>
-                    <span className="font-mono text-base mt-2 flex justify-center">
+                    <span className="font-mono text-lg mt-2 flex justify-center">
                       <AiOutlineCalendar className="mt-1 mr-1" />
                       {item.release_date}
                     </span>
