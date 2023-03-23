@@ -1,6 +1,6 @@
 import Navbar from "../../components/Navbar"
 import Footer from "../../components/Footer"
-import { Label,TextInput,Checkbox,Button } from "flowbite-react";
+import { Label,TextInput,Button } from "flowbite-react";
 import { Link } from "react-router-dom";
 
 

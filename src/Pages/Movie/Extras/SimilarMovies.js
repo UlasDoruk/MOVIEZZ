@@ -41,6 +41,10 @@ function SimilarMovies() {
         slidesPerView={6}
         onSwiper={""}
         scrollbar={{ draggable: true, dragSize: 100 }}
+        breakpoints={{
+          0: { slidesPerView: 5, spaceBetween: 0 },
+          1280: { slidesPerView: 6, spaceBetween: 5 },
+        }}
       >
         {similarMovies.map((item) => {
           return (

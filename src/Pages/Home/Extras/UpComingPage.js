@@ -42,7 +42,7 @@ function UpComingPage() {
   }, [dispatch]);
 
   return (
-    <div className="mb-10">
+    <div className="mb-10 mt-5">
       {status === "loading" && <Loading />}
       <Swiper
         modules={[Scrollbar]}

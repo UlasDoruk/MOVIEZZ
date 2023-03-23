@@ -22,7 +22,7 @@ function Movie() {
 
   return (
     <div
-      className=""
+      className="w-full lg:h-max h-48"
       style={{
         backgroundImage: `linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)), url("https://image.tmdb.org/t/p/original/${movie.backdrop_path}")`,
         backgroundSize: "cover",
@@ -32,44 +32,49 @@ function Movie() {
     >
       <div className="flex justify-start">
         <img
-          className=" rounded-3xl p-5 lg:pl-20"
+          className="w-36 h-44 lg:w-96 lg:h-min p-2 lg:pl-20"
           src={
             movie.poster_path
               ? `${process.env.REACT_APP_API_IMAGE}${movie.poster_path}`
               : "https://pbs.twimg.com/profile_images/1243623122089041920/gVZIvphd_400x400.jpg"
           }
         ></img>
-        <div className="font-bold text-white p-10">
-          <div className="flex justify-start pb-5">
-            <h1 className="text-4xl">
-              {movie.original_title} - ({shortDate})
+        <div className="font-bold text-white lg:p-10 p-1">
+          <div className="lg:flex justify-start lg:pb-5 pb-1  hidden">
+            <h1 className="lg:text-4xl text-sm truncate">
+              {movie.original_title}
+              <span className="">-({shortDate})</span>
             </h1>
           </div>
-          <div className="flex justify-start pb-5">
-            <p className="uppercase">
+          <div className="lg:flex lg:justify-start text-left lg:pb-5 pb-1 lg:text-xl text-sm">
+            <p className="uppercase truncate lg:flex hidden">
               {movie.release_date} - ({movie.original_language})
             </p>
             {genres.map((item, index) => {
               return (
-                <p className="ml-3 underline" key={index}>
+                <p
+                  className="lg:ml-3 ml-1 underline lg:text-xl text-xs"
+                  key={index}
+                >
                   {item}
                 </p>
               );
             })}
-            <div className="pl-5 flex justify-center ">
+            <div className="lg:pl-5 pl-0 flex ">
               {movieHour}h<p className="ml-1">{movieMinute}m</p>
             </div>
           </div>
-          <div className="flex justify-start pb-5">
+
+          <div className="flex justify-start lg:pb-5">
             <p
               className={`${
-                voteAverage >= 7 ? " bg-emerald-900" : "bg-red-900"
-              } p-2 w-min h-min rounded-full`}
+                voteAverage >= 7 ? " lg:bg-emerald-900" : "lg:bg-red-900"
+              } lg:p-2 mt-0  lg:rounded-full `}
             >
               {voteAverage.toString().slice(0, 3)}
             </p>
-            <button className="bg-red-700 p-2 ml-5 rounded-full hover:bg-amber-500">
-              <AiFillHeart className="w-5 h-5" />
+            <button className="lg:bg-red-900  lg:p-2 p-0 lg:ml-5 ml-1 lg:mt-1 lg:rounded-full  lg:hover:bg-amber-500">
+              <AiFillHeart className="h-5 w-5" fill="red" />
             </button>
             {movieTrailer.map((item, index) => {
               if (item.name === "Official Trailer") {
@@ -79,10 +84,11 @@ function Movie() {
                     key={index}
                     target={"_blank"}
                     href={`https://www.youtube.com/watch?v=${item.key}`}
-                    className="flex hover:scale-110  rounded-lg ml-5 text-2xl"
+                    className="flex lg:hover:scale-110  lg:ml-5 ml-1 lg:text-2xl text-sm"
                   >
-                    <MdOutlineVideoLibrary className="mt-2 mr-2 ml-5" /> Watch
-                    Trailer
+                    <MdOutlineVideoLibrary className="mt-1 lg:mr-2 mr-1 lg:ml-5 ml-2 " />
+                    <span className="lg:flex hidden">Watch Trailer</span>
+                    <span className="lg:hidden flex">Trailer</span>
                   </a>
                 );
               }
@@ -91,18 +97,21 @@ function Movie() {
               <a
                 target={"_blank"}
                 href={`https://www.youtube.com/watch?v=${movieFirstTrailer.key}`}
-                className="flex hover:scale-110  rounded-lg ml-5 text-2xl"
+                className="flex lg:hover:scale-110 lg:ml-5 ml-1 lg:text-2xl text-sm"
               >
-                <MdOutlineVideoLibrary className="mt-2 mr-2 ml-5" /> Watch
-                Trailer
+                <MdOutlineVideoLibrary className="mt-1 lg:mr-2 mr-1 lg:ml-5 ml-2" />
+                <span className="lg:flex hidden">Watch Trailer</span>
+                <span className="lg:hidden flex">Trailer</span>
               </a>
             )}
           </div>
-          <h2 className="text-white flex justify-start uppercase italic opacity-80 pb-5">
+          <h2 className="text-white flex justify-start text-start lg:uppercase italic opacity-80 lg:pb-5 pr-1">
             {movie.tagline}
           </h2>
-          <p className="text-justify text-lg w-1/2 pb-10">{movie.overview}</p>
-          <div className="flex justify-start">
+          <p className="text-justify text-lg w-1/2 pb-10 lg:flex hidden">
+            {movie.overview}
+          </p>
+          <div className=" justify-start lg:flex hidden">
             {movieCreditsDirectors.map((item, index) => {
               if (item.known_for_department === "Directing") {
                 return (

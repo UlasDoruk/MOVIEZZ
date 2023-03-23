@@ -46,6 +46,10 @@ function Recommendations() {
         slidesPerView={6}
         onSwiper={""}
         scrollbar={{ draggable: true, dragSize: 100 }}
+        breakpoints={{
+          0: { slidesPerView: 5, spaceBetween: 0 },
+          1280: { slidesPerView: 6, spaceBetween: 5 },
+        }}
       >
         {recommendedMovies.map((item) => {
           return (
@@ -71,21 +75,6 @@ function Recommendations() {
                   </div>
                 </div>
               </Link>
-              {/* <Tooltip id="tooltip">
-                <Link
-                  to={`/movie/${item.id}`}
-                  className="flex justify-around hover:bg-blue-500"
-                >
-                  <button
-                    onClick={() => handleMovieID(item.id)}
-                    className="text-white  p-2  flex justify-center lg:mr-5"
-                  >
-                    <p className="hidden lg:block font-mono text-lg opacity-50 mt-1">
-                      {item.release_date}
-                    </p>
-                  </button>
-                </Link>
-              </Tooltip> */}
             </SwiperSlide>
           );
         })}
