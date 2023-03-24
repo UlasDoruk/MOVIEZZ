@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 // Redux
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { fetchSearchedMovies } from "../redux/fetchApı";
 
 // Icon
@@ -16,8 +16,6 @@ import "react-toastify/dist/ReactToastify.css";
 function SearchBar() {
 
   let dispatch =useDispatch()
-
-  const status = useSelector((state) => state.movies.status);
 
   const [input,setInput] = useState("")
   
@@ -35,7 +33,7 @@ function SearchBar() {
         <input
           value={input}
           type="text"
-          className="  lg:w-96 w-full lg:p-4 p-2 lg:ml-20 ml-2 text-sm text-gray-900  rounded"
+          className="  lg:w-96 w-full lg:p-4 p-2 lg:ml-20 ml-2 lg:text-lg text-sm italic text-slate-900  rounded"
           placeholder="Search a Movie"
           required
           onChange={(e) => setInput(e.target.value)}

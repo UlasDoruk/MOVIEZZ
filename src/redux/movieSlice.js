@@ -45,6 +45,10 @@ export const movieSlice = createSlice({
   extraReducers: {
     [fetchSearchedMovies.fulfilled]: (state, action) => {
       state.searchedMovies = action.payload.filter((e) => e.poster_path);
+      if(!state.searchedMovies.length){
+        state.status = "failed"
+      }
+      // state.status = "succeeded";
     },
     [fetchSearchedMovies.pending]: (state) => {
       state.status = "loading";
