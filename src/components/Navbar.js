@@ -11,7 +11,7 @@ import { fetchTopRatedMovies } from "../redux/fetchApı";
 
 // Icon
 import { BiCameraMovie } from "react-icons/bi";
-import {TbCircleArrowDownFilled} from "react-icons/tb"
+import { MdOutlineFormatAlignJustify } from "react-icons/md";
 
 
 function Navbar() {
@@ -69,11 +69,11 @@ function Navbar() {
       </div>
       {/* Lower screen size under the lg */}
       <button
-        className="rounded p-2 mr-1 lg:hidden bg-blue-500"
+        className="rounded pr-2 m-1 pl-2 mr-1 lg:hidden "
         aria-describedby={id}
         onClick={handleClick}
       >
-        <TbCircleArrowDownFilled />
+        <MdOutlineFormatAlignJustify className="w-5 h-5" />
       </button>
       <Popover
         id={id}
