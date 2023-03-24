@@ -1,13 +1,21 @@
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
+
+// Icon
+import { GrLogin } from "react-icons/gr";
+
+// Flowbite
 import { Label, TextInput, Button } from "flowbite-react";
 
 function RegisterPage() {
   return (
     <>
       <Navbar />
+      <h1 className="text-black font-bold text-2xl flex justify-center pt-10">
+        Sign up 
+        <GrLogin className="mt-1.5 ml-2" />
+      </h1>
       <div className="flex justify-center">
-        {" "}
         <form className="flex flex-col gap-4 lg:p-0 lg:w-1/3 lg:pt-10 lg:pb-5 p-5 text-left">
           <div>
             <div className="mb-2 block">
@@ -34,11 +42,11 @@ function RegisterPage() {
           </div>
           <div>
             <div className="mb-2 block">
-              <Label htmlFor="repeat-password" value="Repeat password" />
+              <Label htmlFor="name" value="Name" />
             </div>
             <TextInput
-              id="repeat-password"
-              type="password"
+              id=""
+              type="text"
               required={true}
               shadow={true}
             />

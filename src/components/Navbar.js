@@ -1,6 +1,9 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import SearchBar from "./SearchBar";
-import { Dropdown } from "flowbite-react";
+
+// Material IU
+import Popover from "@mui/material/Popover";
 
 // Redux
 import { useDispatch, useSelector } from "react-redux";
@@ -8,20 +11,39 @@ import { fetchTopRatedMovies } from "../redux/fetchApı";
 
 // Icon
 import { BiCameraMovie } from "react-icons/bi";
+import {TbCircleArrowDownFilled} from "react-icons/tb"
 
 
 function Navbar() {
 
-  const dispatch = useDispatch()
+  // Material UI Popover
+  // ---------------------
+  const [anchorEl, setAnchorEl] = React.useState(null);
 
-  let pageNumber = useSelector((state)=>state.movies.pageNumber)
-  let firstFetchTopRated = useSelector((state) => state.movies.firstFetchTopRated);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
 
-    const handleFirstFetchTopRated = () => {
-      if (firstFetchTopRated === true ) {
-        dispatch(fetchTopRatedMovies(pageNumber));
-      }
-    };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? "simple-popover" : undefined;
+  // ---------------------
+
+  const dispatch = useDispatch();
+
+  let pageNumber = useSelector((state) => state.movies.pageNumber);
+  let firstFetchTopRated = useSelector(
+    (state) => state.movies.firstFetchTopRated
+  );
+
+  const handleFirstFetchTopRated = () => {
+    if (firstFetchTopRated === true) {
+      dispatch(fetchTopRatedMovies(pageNumber));
+    }
+  };
 
   return (
     <div className="flex justify-between font-bold  lg:text-2xl text-sm bg-gray-900 top-0 text-white lg:p-3 p-1">
@@ -45,35 +67,38 @@ function Navbar() {
           <p className="hover:underline mr-5">Login</p>
         </Link>
       </div>
-      <div className="flex items-center lg:hidden ">
-        <Dropdown
-          label={""}
-          color={"blue"}
-          dismissOnClick={false}
-          inline={false}
-          size="sm"
-        >
-          <Dropdown.Item>
-            {
-              <Link to={"/toprated"}>
-                <p
-                  onClick={handleFirstFetchTopRated}
-                  className="hover:scale-110"
-                >
-                  Top Rated
-                </p>
-              </Link>
-            }
-          </Dropdown.Item>
-          <Dropdown.Item>
-            {
-              <Link to={"/login"}>
-                <p className="hover:scale-110 ">Login</p>
-              </Link>
-            }
-          </Dropdown.Item>
-        </Dropdown>
-      </div>
+      {/* Lower screen size under the lg */}
+      <button
+        className="rounded p-2 mr-1 lg:hidden bg-blue-500"
+        aria-describedby={id}
+        onClick={handleClick}
+      >
+        <TbCircleArrowDownFilled />
+      </button>
+      <Popover
+        id={id}
+        open={open}
+        anchorEl={anchorEl}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "left",
+        }}
+      >
+        <div className="bg-gray-800 text-white font-bold ">
+          <Link to={"/toprated"}>
+            <p
+              onClick={handleFirstFetchTopRated}
+              className="border-solid border-gray-500 border-b-2 p-2"
+            >
+              Top Rated
+            </p>
+          </Link>
+          <Link to={"/login"}>
+            <p className=" p-2 ">Login</p>
+          </Link>
+        </div>
+      </Popover>
     </div>
   );
 }
