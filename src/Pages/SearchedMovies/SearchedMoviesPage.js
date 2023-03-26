@@ -1,7 +1,7 @@
 import Navbar from "../../components/Navbar"
 import Footer from "../../components/Footer"
 import ErrorPage from "../Error/ErrorPage"
-import { Link} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 // Flowbite
 import { Card } from "flowbite-react";
@@ -22,9 +22,9 @@ import { FaWalking } from "react-icons/fa";
 
 function SearchedMoviesPage() {
 
-     const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
-    const searchedMovies = useSelector((state)=>state.movies.searchedMovies)
+    let searchedMovies = useSelector((state)=>state.movies.searchedMovies)
     const status = useSelector((state)=>state.movies.status)
 
     const handleMovieID = (item_ID) => {

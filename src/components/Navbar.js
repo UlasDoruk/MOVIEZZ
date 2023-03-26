@@ -13,7 +13,6 @@ import { fetchTopRatedMovies } from "../redux/fetchApı";
 import { BiCameraMovie } from "react-icons/bi";
 import { MdOutlineFormatAlignJustify } from "react-icons/md";
 
-
 function Navbar() {
 
   // Material UI Popover
@@ -35,18 +34,17 @@ function Navbar() {
   const dispatch = useDispatch();
 
   let pageNumber = useSelector((state) => state.movies.pageNumber);
-  let firstFetchTopRated = useSelector(
-    (state) => state.movies.firstFetchTopRated
-  );
+  let firstFetchTopRated = useSelector((state) => state.movies.firstFetchTopRated);
+  const user = useSelector((state) => state.auth.user);
 
   const handleFirstFetchTopRated = () => {
     if (firstFetchTopRated === true) {
       dispatch(fetchTopRatedMovies(pageNumber));
     }
   };
-
+  
   return (
-    <div className="flex justify-between font-bold  lg:text-2xl text-sm bg-gray-900 top-0 text-white lg:p-3 p-1">
+    <div className="flex justify-between font-bold  lg:text-lg text-sm bg-gray-900 top-0 text-white lg:p-3 p-1">
       <Link to={"/"}>
         <p className="flex justify-center lg:hover:scale-110 underline lg:no-underline hover:decoration-white decoration-transparent mt-1">
           <span className="lg:contents hidden">MOVIEZZ</span>
@@ -58,14 +56,21 @@ function Navbar() {
         <Link to={"/toprated"}>
           <p
             onClick={handleFirstFetchTopRated}
-            className="hover:underline mr-5"
+            className="hover:bg-gray-700 rounded  text-lg p-2"
           >
             Top Rated
           </p>
         </Link>
-        <Link to={"/login"}>
-          <p className="hover:underline mr-5">Login</p>
-        </Link>
+        {user && (
+          <Link to={`/profile/${user.id}`}>
+            <p className="hover:bg-gray-700 rounded  p-2">Profile</p>
+          </Link>
+        )}
+        {!user && (
+          <Link to={"/login"}>
+            <p className="hover:bg-gray-700 rounded mr-5 p-2">Login</p>
+          </Link>
+        )}
       </div>
       {/* Lower screen size under the lg */}
       <button
@@ -94,9 +99,11 @@ function Navbar() {
               Top Rated
             </p>
           </Link>
-          <Link to={"/login"}>
-            <p className=" p-2 ">Login</p>
-          </Link>
+          {!user && (
+            <Link to={"/login"}>
+              <p className=" p-2 ">Login</p>
+            </Link>
+          )}
         </div>
       </Popover>
     </div>
