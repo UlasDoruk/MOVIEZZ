@@ -12,6 +12,7 @@ import { fetchTopRatedMovies } from "../redux/fetchApı";
 // Icon
 import { BiCameraMovie } from "react-icons/bi";
 import { MdOutlineFormatAlignJustify } from "react-icons/md";
+import { GiPlagueDoctorProfile } from "react-icons/gi";
 
 function Navbar() {
 
@@ -48,7 +49,7 @@ function Navbar() {
       <Link to={"/"}>
         <p className="flex justify-center lg:hover:scale-110 underline lg:no-underline hover:decoration-white decoration-transparent mt-1">
           <span className="lg:contents hidden">MOVIEZZ</span>
-          <BiCameraMovie className="mt-1 ml-2" />
+          <BiCameraMovie className="mt-0 ml-2 w-6 h-6" />
         </p>
       </Link>
       <SearchBar />
@@ -62,8 +63,8 @@ function Navbar() {
           </p>
         </Link>
         {user && (
-          <Link to={`/profile/${user.id}`}>
-            <p className="hover:bg-gray-700 rounded  p-2">Profile</p>
+          <Link to={`/profile/${user.uid}`}>
+            <GiPlagueDoctorProfile className="w-8 h-8 mr-5 ml-5 hover:scale-125" />
           </Link>
         )}
         {!user && (
@@ -99,9 +100,13 @@ function Navbar() {
               Top Rated
             </p>
           </Link>
-          {!user && (
+          {!user ? (
             <Link to={"/login"}>
               <p className=" p-2 ">Login</p>
+            </Link>
+          ) : (
+            <Link to={`/profile/${user.uid}`}>
+              <p className="p-2">Profile</p>
             </Link>
           )}
         </div>

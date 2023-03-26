@@ -16,7 +16,7 @@ function Footer() {
         ></img>
       </a>
       {user ? (
-        <p className="bg-blue-400 rounded  lg:p-2 p-1 mx-5 my-4">Welcome {user.email}</p>
+        <p className="bg-blue-400 rounded  lg:p-2 p-1 mx-5 my-4">Welcome {user.displayName}</p>
       ) : (
         <p className="bg-blue-400 rounded  lg:p-2 p-1 mx-5 my-4">Welcome</p>
       )}

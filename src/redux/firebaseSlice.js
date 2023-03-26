@@ -3,18 +3,19 @@ import { createSlice } from "@reduxjs/toolkit";
 const firebaseSlice = createSlice({
     name : "auth",
     initialState:{
-        user : JSON.parse(localStorage.getItem("user")) ?? false
+        user : []
     },
     reducers:{
         getRegister : (state,action)=>{
-            localStorage.setItem("user",JSON.stringify(action.payload))
+            // localStorage.setItem("user",JSON.stringify(action.payload))
             state.user = action.payload
         },
         login:(state,action)=>{
-            localStorage.setItem("user",JSON.stringify(action.payload))
+            // localStorage.setItem("user",JSON.stringify(action.payload))
             state.user = action.payload
         },logout :(state)=>{
-            localStorage.removeItem("user")
+            // localStorage.removeItem("user")
+            state.user = []
             state.user = false
         }
     }
