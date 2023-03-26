@@ -7,14 +7,11 @@ const firebaseSlice = createSlice({
     },
     reducers:{
         getRegister : (state,action)=>{
-            // localStorage.setItem("user",JSON.stringify(action.payload))
             state.user = action.payload
         },
         login:(state,action)=>{
-            // localStorage.setItem("user",JSON.stringify(action.payload))
             state.user = action.payload
         },logout :(state)=>{
-            // localStorage.removeItem("user")
             state.user = []
             state.user = false
         }

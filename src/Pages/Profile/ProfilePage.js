@@ -2,11 +2,15 @@ import { useState } from "react";
 import Footer from "../../components/Footer";
 import { useNavigate } from "react-router-dom";
 
+// Toastify
+import { toast } from "react-toastify";
+
 // Icon
-import {IoCloseSharp} from "react-icons/io5"
+import { IoCloseSharp } from "react-icons/io5";
 
 // Firebase
 import { logout } from "../../redux/firebaseSlice";
+import { update, updateEMAİL, updatePASSWORD } from "../../Firebase/Firebase";
 
 // Redux
 import { useDispatch, useSelector } from "react-redux";
@@ -21,23 +25,52 @@ function ProfilePage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [displayName, setDisplayName] = useState("");
-  let [updateSection,setUpdateSection] = useState(false) 
+  let [updateSection, setUpdateSection] = useState(false);
 
   const handleLogout = () => {
     dispatch(logout());
     navigate("/", { replace: true });
   };
 
-  const handleUpdateSection = ()=>{
-    (updateSection === false ?
-         setUpdateSection(true) : 
-         setUpdateSection(false)
-         )
-  }
+  const handleUpdateSection = () => {
+    updateSection === false ? setUpdateSection(true) : setUpdateSection(false);
+  };
+
+  const handleUpdateName = async (e) => {
+    e.preventDefault();
+    if (displayName) {
+      await update({ displayName });
+      toast.success("Profile Name Updated", {
+        position: toast.POSITION.TOP_LEFT,
+      });
+    } else {
+      toast.warning("Empty Name", { position: toast.POSITION.TOP_LEFT });
+    }
+  };
+
+  const handleUpdateEmail = async (e) => {
+    e.preventDefault();
+    if (email) {
+      await updateEMAİL(email);
+      toast.success("Profile Email Updated");
+    } else {
+      toast.warning("Empty Email", { position: toast.POSITION.TOP_LEFT });
+    }
+  };
+
+  const handleUpdatePassword = async (e) => {
+    e.preventDefault();
+    if (password) {
+      await updatePASSWORD(password);
+      toast.success("Profile Password Updated");
+    } else {
+      toast.warning("Empty Password", { position: toast.POSITION.TOP_LEFT });
+    }
+  };
 
   return (
     <>
-    <Navbar/>
+      <Navbar />
       <div className="flex justify-start">
         <div className="bg-slate-100 rounded p-5 mt-5 w-screen h-screen ml-20">
           <p className="text-left font-bold text-lg opacity-70 ">
@@ -60,9 +93,13 @@ function ProfilePage() {
                   type={"email"}
                   placeholder={user.email}
                   value={email}
-                  className="rounded"
+                  className="rounded text-black"
+                  onChange={(e) => setEmail(e.target.value)}
                 ></input>
-                <button className="bg-green-500 p-2 rounded w-full mt-1">
+                <button
+                  onClick={handleUpdateEmail}
+                  className="bg-green-500 p-2 rounded w-full mt-1"
+                >
                   Update
                 </button>
               </div>
@@ -70,11 +107,15 @@ function ProfilePage() {
                 <h2 className="text-black text-left">Password</h2>
                 <input
                   type={"password"}
-                  placeholder={user.password}
+                  placeholder={"******"}
                   value={password}
-                  className="rounded"
+                  className="rounded text-black"
+                  onChange={(e) => setPassword(e.target.value)}
                 ></input>
-                <button className="bg-green-500  p-2 rounded w-full mt-1">
+                <button
+                  onClick={handleUpdatePassword}
+                  className="bg-green-500  p-2 rounded w-full mt-1"
+                >
                   Update
                 </button>
               </div>
@@ -84,9 +125,13 @@ function ProfilePage() {
                   type={"text"}
                   placeholder={user.displayName}
                   value={displayName}
-                  className="rounded"
+                  className="rounded text-black"
+                  onChange={(e) => setDisplayName(e.target.value)}
                 ></input>
-                <button className="bg-green-500  p-2 rounded w-full mt-1">
+                <button
+                  onClick={handleUpdateName}
+                  className="bg-green-500  p-2 rounded w-full mt-1"
+                >
                   Update
                 </button>
               </div>

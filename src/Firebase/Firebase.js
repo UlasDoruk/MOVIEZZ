@@ -1,10 +1,15 @@
+// Firebase
 import { initializeApp } from "firebase/app";
 import {
     getAuth
     ,createUserWithEmailAndPassword
     ,signInWithEmailAndPassword
     ,signOut
+    ,updateProfile
+    ,updateEmail
+    ,updatePassword
 } from "firebase/auth"
+
 import {toast} from "react-toastify"
 
 const firebaseConfig = {
@@ -51,5 +56,32 @@ export const logout = async (email, password) => {
     toast.error(error.message, { position: toast.POSITION.TOP_LEFT });
   }
 };
+
+export const update = async(data)=>{
+  try{
+    await updateProfile(auth.currentUser,data)
+  }catch(error){
+    toast.error(error.message, { position: toast.POSITION.TOP_LEFT });
+  }
+}
+
+export const updateEMAİL = async(data)=>{
+  try{
+    await updateEmail(auth.currentUser,data)
+  }catch(error){
+    toast.error(error.message, { position: toast.POSITION.TOP_LEFT });
+    console.log(error.message)
+  }
+}
+
+export const updatePASSWORD = async (data) => {
+  try {
+    await updatePassword(auth.currentUser, data);
+  } catch (error) {
+    toast.error(error.message, { position: toast.POSITION.TOP_LEFT });
+    console.log(error.message);
+  }
+};
+
 
 export default app
