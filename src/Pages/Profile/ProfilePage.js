@@ -9,7 +9,9 @@ import { toast } from "react-toastify";
 import { IoCloseSharp } from "react-icons/io5";
 
 // Firebase
-import { logout } from "../../redux/firebaseSlice";
+import {
+  logout,
+} from "../../redux/firebaseSlice";
 import { update, updateEMAİL, updatePASSWORD } from "../../Firebase/Firebase";
 
 // Redux
@@ -17,6 +19,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Navbar from "../../components/Navbar";
 
 function ProfilePage() {
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -24,7 +27,8 @@ function ProfilePage() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [displayName, setDisplayName] = useState("");
+  const [displayName, setDisplayName] = useState(user.displayName || "");
+  const [photo,setPhoto] = useState(user.photoURL || "")
   let [updateSection, setUpdateSection] = useState(false);
 
   const handleLogout = () => {
@@ -39,13 +43,14 @@ function ProfilePage() {
   const handleUpdateName = async (e) => {
     e.preventDefault();
     if (displayName) {
-      await update({ displayName });
+      await update({displayName });
       toast.success("Profile Name Updated", {
         position: toast.POSITION.TOP_LEFT,
       });
-    } else {
-      toast.warning("Empty Name", { position: toast.POSITION.TOP_LEFT });
+    }else {
+      toast.warning("Empty", { position: toast.POSITION.TOP_LEFT });
     }
+    console.log(user);
   };
 
   const handleUpdateEmail = async (e) => {
@@ -67,6 +72,18 @@ function ProfilePage() {
       toast.warning("Empty Password", { position: toast.POSITION.TOP_LEFT });
     }
   };
+
+  const handleUpdateUserPhoto = async(e)=>{
+    e.preventDefault()
+    if(photo){
+      await update({photoURL:photo})
+      toast.success("Profile Avatar Updated", {
+        position: toast.POSITION.TOP_LEFT,
+      });
+    }else{
+      toast.warning("Empty Avatar URL", { position: toast.POSITION.TOP_LEFT });
+    }
+  }
 
   return (
     <>
@@ -131,6 +148,22 @@ function ProfilePage() {
                 <button
                   onClick={handleUpdateName}
                   className="bg-green-500  p-2 rounded w-full mt-1"
+                >
+                  Update
+                </button>
+              </div>
+              <div className=" flex-col">
+                <h2 className="text-black text-left">Photo</h2>
+                <input
+                  type={"text"}
+                  placeholder={"Image"}
+                  value={photo}
+                  className="rounded text-black"
+                  onChange={(e) => setPhoto(e.target.value)}
+                ></input>
+                <button
+                  onClick={handleUpdateUserPhoto}
+                  className="bg-green-500 p-2 rounded w-full mt-1"
                 >
                   Update
                 </button>

@@ -47,7 +47,7 @@ function Navbar() {
   return (
     <div className="flex justify-between font-bold  lg:text-lg text-sm bg-gray-900 top-0 text-white lg:p-3 p-1">
       <Link to={"/"}>
-        <p className="flex justify-center lg:hover:scale-110 underline lg:no-underline hover:decoration-white decoration-transparent mt-1">
+        <p className="flex justify-center lg:hover:scale-110 underline lg:no-underline hover:decoration-white decoration-transparent lg:mt-3 mt-2 ml-2">
           <span className="lg:contents hidden">MOVIEZZ</span>
           <BiCameraMovie className="mt-0 ml-2 w-6 h-6" />
         </p>
@@ -62,14 +62,21 @@ function Navbar() {
             Top Rated
           </p>
         </Link>
-        {user && (
-          <Link to={`/profile/${user.uid}`}>
-            <GiPlagueDoctorProfile className="w-8 h-8 mr-5 ml-5 hover:scale-125" />
-          </Link>
-        )}
-        {!user && (
+        {user.length === 0 ? (
           <Link to={"/login"}>
             <p className="hover:bg-gray-700 rounded mr-5 p-2">Login</p>
+          </Link>
+        ) : (
+          <Link to={`/profile/${user.uid}`}>
+            {user.photoURL ? (
+              <img
+                alt="Profile Avatar"
+                className="w-10 h-10 mr-5 ml-5 rounded-full hover:scale-125"
+                src={user.photoURL}
+              />
+            ) : (
+              <GiPlagueDoctorProfile className="w-8 h-8 mr-5 ml-5  hover:scale-125" />
+            )}
           </Link>
         )}
       </div>
