@@ -6,7 +6,9 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 // Icon
-import { IoCloseSharp } from "react-icons/io5";
+import { IoCloseSharp} from "react-icons/io5";
+import {IoMdEye} from "react-icons/io"
+import {AiFillEyeInvisible} from "react-icons/ai"
 
 // Firebase
 import {
@@ -29,6 +31,7 @@ function ProfilePage() {
   const [password, setPassword] = useState("");
   const [displayName, setDisplayName] = useState(user.displayName || "");
   const [photo,setPhoto] = useState(user.photoURL || "")
+  let [showPassword,setShowPassword] = useState(false)
   let [updateSection, setUpdateSection] = useState(false);
 
   const handleLogout = () => {
@@ -39,6 +42,11 @@ function ProfilePage() {
   const handleUpdateSection = () => {
     updateSection === false ? setUpdateSection(true) : setUpdateSection(false);
   };
+
+  const handleShowPassword = (e)=>{
+    e.preventDefault()
+    showPassword === false ? setShowPassword(true) : setShowPassword(false)
+  }
 
   const handleUpdateName = async (e) => {
     e.preventDefault();
@@ -102,7 +110,7 @@ function ProfilePage() {
                 className=" text-black mb-0 w-min rounded bg-red-500"
                 onClick={handleUpdateSection}
               >
-                <IoCloseSharp className="w-6 h-6" />
+                <IoCloseSharp className="w-6 h-6 text-white" />
               </button>
               <div className=" flex-col">
                 <h2 className="text-black text-left">E-mail</h2>
@@ -120,15 +128,31 @@ function ProfilePage() {
                   Update
                 </button>
               </div>
-              <div>
+              <div className="relative">
                 <h2 className="text-black text-left">Password</h2>
                 <input
-                  type={"password"}
+                  type={showPassword ? "text" : "password"}
                   placeholder={"******"}
                   value={password}
-                  className="rounded text-black"
+                  className="rounded  text-black"
                   onChange={(e) => setPassword(e.target.value)}
                 ></input>
+                {showPassword ? (
+                  <button
+                    onClick={handleShowPassword}
+                    className="rounded-full absolute -right-0 mt-3 mr-2 text-black"
+                  >
+                    <AiFillEyeInvisible />
+                  </button>
+                ) : (
+                  <button
+                    onClick={handleShowPassword}
+                    className="rounded-full absolute -right-0 mt-3 mr-2 text-black"
+                  >
+                    <IoMdEye />
+                  </button>
+                )}
+
                 <button
                   onClick={handleUpdatePassword}
                   className="bg-green-500  p-2 rounded w-full mt-1"
@@ -153,10 +177,10 @@ function ProfilePage() {
                 </button>
               </div>
               <div className=" flex-col">
-                <h2 className="text-black text-left">Photo</h2>
+                <h2 className="text-black text-left">Avatar</h2>
                 <input
                   type={"text"}
-                  placeholder={"Image"}
+                  placeholder={"Image URL"}
                   value={photo}
                   className="rounded text-black"
                   onChange={(e) => setPhoto(e.target.value)}
