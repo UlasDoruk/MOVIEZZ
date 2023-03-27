@@ -48,7 +48,6 @@ export const movieSlice = createSlice({
       if(!state.searchedMovies.length){
         state.status = "failed"
       }
-      // state.status = "succeeded";
     },
     [fetchSearchedMovies.pending]: (state) => {
       state.status = "loading";

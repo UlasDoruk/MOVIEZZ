@@ -36,7 +36,7 @@ function Navbar() {
 
   let pageNumber = useSelector((state) => state.movies.pageNumber);
   let firstFetchTopRated = useSelector((state) => state.movies.firstFetchTopRated);
-  const user = useSelector((state) => state.auth.user);
+  const user = JSON.parse(localStorage.getItem("user"))
 
   const handleFirstFetchTopRated = () => {
     if (firstFetchTopRated === true) {
@@ -62,7 +62,7 @@ function Navbar() {
             Top Rated
           </p>
         </Link>
-        {user.length === 0 ? (
+        {!user ? (
           <Link to={"/login"}>
             <p className="hover:bg-gray-700 rounded mr-5 p-2">Login</p>
           </Link>

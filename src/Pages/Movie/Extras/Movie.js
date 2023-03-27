@@ -1,3 +1,7 @@
+// Firebase
+import { addFavorite } from "../../../Firebase/Firebase";
+import { setFavMovies } from "../../../redux/firebaseSlice";
+
 // Redux
 import { useSelector} from 'react-redux'
 
@@ -19,6 +23,12 @@ function Movie() {
   const movieCreditsDirectors = useSelector((state) => state.movies.movieCreditsDirectors);
   const movieTrailer = useSelector((state) => state.movies.movieTrailer);
   const movieFirstTrailer = useSelector((state) => state.movies.movieFirstTrailer);
+  const user = useSelector((state)=>state.auth.user)
+
+  const handleFavoriteMovies =async()=>{
+      await addFavorite({ uid: user.uid, movie });
+      setFavMovies("");
+  }
 
   return (
     <div
@@ -73,7 +83,7 @@ function Movie() {
             >
               {voteAverage.toString().slice(0, 3)}
             </p>
-            <button className="lg:bg-red-900  lg:p-2 p-0 lg:ml-5 ml-1 lg:rounded-full  lg:hover:bg-amber-500">
+            <button onClick={handleFavoriteMovies} className="lg:bg-red-900  lg:p-2 p-0 lg:ml-5 ml-1 lg:rounded-full  lg:hover:bg-amber-500">
               <AiFillHeart className="h-5 w-5" fill="red" />
             </button>
             {movieTrailer.map((item, index) => {

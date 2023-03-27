@@ -13,7 +13,9 @@ function HomePage() {
         <PopularPage />
         <TitleBar title="Up Coming Movies" />
         <UpComingPage />
-        <Footer />
+        <div className="lg:static absolute bottom-0 lg:p-0 p-3 w-full">
+          <Footer />
+        </div>
       </div>
     </>
   );

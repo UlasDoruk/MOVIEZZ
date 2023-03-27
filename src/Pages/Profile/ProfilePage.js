@@ -1,19 +1,18 @@
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Footer from "../../components/Footer";
-import { useNavigate } from "react-router-dom";
+import FavoriteSection from "./FavoriteSection";
 
 // Toastify
 import { toast } from "react-toastify";
 
 // Icon
-import { IoCloseSharp} from "react-icons/io5";
-import {IoMdEye} from "react-icons/io"
-import {AiFillEyeInvisible} from "react-icons/ai"
+import { IoCloseSharp } from "react-icons/io5";
+import { IoMdEye } from "react-icons/io";
+import { AiFillEyeInvisible } from "react-icons/ai";
 
 // Firebase
-import {
-  logout,
-} from "../../redux/firebaseSlice";
+import { logout } from "../../redux/firebaseSlice";
 import { update, updateEMAİL, updatePASSWORD } from "../../Firebase/Firebase";
 
 // Redux
@@ -21,7 +20,6 @@ import { useDispatch, useSelector } from "react-redux";
 import Navbar from "../../components/Navbar";
 
 function ProfilePage() {
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -30,9 +28,9 @@ function ProfilePage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [displayName, setDisplayName] = useState(user.displayName || "");
-  const [photo,setPhoto] = useState(user.photoURL || "")
-  let [showPassword,setShowPassword] = useState(false)
-  let [updateSection, setUpdateSection] = useState(false);
+  const [photo, setPhoto] = useState(user.photoURL || "");
+  let [showPassword, setShowPassword] = useState(false);
+  let [updateSection, setUpdateSection] = useState(true);
 
   const handleLogout = () => {
     dispatch(logout());
@@ -43,22 +41,21 @@ function ProfilePage() {
     updateSection === false ? setUpdateSection(true) : setUpdateSection(false);
   };
 
-  const handleShowPassword = (e)=>{
-    e.preventDefault()
-    showPassword === false ? setShowPassword(true) : setShowPassword(false)
-  }
+  const handleShowPassword = (e) => {
+    e.preventDefault();
+    showPassword === false ? setShowPassword(true) : setShowPassword(false);
+  };
 
   const handleUpdateName = async (e) => {
     e.preventDefault();
     if (displayName) {
-      await update({displayName });
+      await update({ displayName });
       toast.success("Profile Name Updated", {
         position: toast.POSITION.TOP_LEFT,
       });
-    }else {
+    } else {
       toast.warning("Empty", { position: toast.POSITION.TOP_LEFT });
     }
-    console.log(user);
   };
 
   const handleUpdateEmail = async (e) => {
@@ -81,27 +78,27 @@ function ProfilePage() {
     }
   };
 
-  const handleUpdateUserPhoto = async(e)=>{
-    e.preventDefault()
-    if(photo){
-      await update({photoURL:photo})
+  const handleUpdateUserPhoto = async (e) => {
+    e.preventDefault();
+    if (photo) {
+      await update({ photoURL: photo });
       toast.success("Profile Avatar Updated", {
         position: toast.POSITION.TOP_LEFT,
       });
-    }else{
+    } else {
       toast.warning("Empty Avatar URL", { position: toast.POSITION.TOP_LEFT });
     }
-  }
+  };
 
   return (
     <>
       <Navbar />
-      <div className="flex justify-start">
-        <div className="bg-slate-100 rounded p-5 mt-5 w-screen h-screen ml-20">
+      <div className="flex lg:flex-nowrap flex-wrap justify-start">
+        <div className="bg-slate-100 rounded p-5 mt-5 w-screen  lg:ml-20">
           <p className="text-left font-bold text-lg opacity-70 ">
             Favorite Movies
           </p>
-          <div className="w-full h-full flex justify-start mt-5">hi</div>
+          <FavoriteSection />
         </div>
         {updateSection ? (
           <div className="flex justify-center text-lg text-white  font-bold bg-blue-100 p-5 rounded mt-5 ml-20 mr-20 h-min">
@@ -209,8 +206,7 @@ function ProfilePage() {
           </button>
         )}
       </div>
-
-      <Footer />
+        <Footer />
     </>
   );
 }
