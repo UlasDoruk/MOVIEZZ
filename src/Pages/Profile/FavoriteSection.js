@@ -34,7 +34,7 @@ function FavoriteSection() {
         {favMovies.map((item)=>{
             return (
               <div key={item.id} className="flex">
-                <div className="max-w-sm flex p-2 bg-slate-100">
+                <div className="max-w-sm flex p-2 ">
                   <Card
                     className="bg-slate-50"
                     imgSrc={`${process.env.REACT_APP_API_IMAGE}${item.poster_path}`}

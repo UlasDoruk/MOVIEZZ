@@ -1,6 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import SearchBar from "./SearchBar";
+
+// Firebase
+import { logout } from "../redux/firebaseSlice";
 
 // Material IU
 import Popover from "@mui/material/Popover";
@@ -33,6 +36,7 @@ function Navbar() {
   // ---------------------
 
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   let pageNumber = useSelector((state) => state.movies.pageNumber);
   let firstFetchTopRated = useSelector((state) => state.movies.firstFetchTopRated);
@@ -42,6 +46,11 @@ function Navbar() {
     if (firstFetchTopRated === true) {
       dispatch(fetchTopRatedMovies(pageNumber));
     }
+  };
+
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate("/", { replace: true });
   };
   
   return (
@@ -112,9 +121,16 @@ function Navbar() {
               <p className=" p-2 ">Login</p>
             </Link>
           ) : (
-            <Link to={`/profile/${user.uid}`}>
-              <p className="p-2">Profile</p>
-            </Link>
+            <>
+              <Link to={`/profile/${user.uid}`}>
+                <p className="border-solid border-gray-500 border-b-2  p-2">
+                  Profile
+                </p>
+              </Link>
+              <p onClick={handleLogout} className="p-2">
+                Logout
+              </p>
+            </>
           )}
         </div>
       </Popover>

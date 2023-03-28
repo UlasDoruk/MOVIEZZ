@@ -20,6 +20,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Navbar from "../../components/Navbar";
 
 function ProfilePage() {
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -94,14 +95,14 @@ function ProfilePage() {
     <>
       <Navbar />
       <div className="flex lg:flex-nowrap flex-wrap justify-start">
-        <div className="bg-slate-100 rounded p-5 mt-5 w-screen  lg:ml-20">
-          <p className="text-left font-bold text-lg opacity-70 ">
+        <div className="lg:bg-slate-100 rounded p-5 mt-5 w-screen  lg:ml-20">
+          <p className="lg:text-left font-bold text-lg opacity-70 ">
             Favorite Movies
           </p>
           <FavoriteSection />
         </div>
         {updateSection ? (
-          <div className="flex justify-center text-lg text-white  font-bold bg-blue-100 p-5 rounded mt-5 ml-20 mr-20 h-min">
+          <div className="flex justify-center text-lg text-white  font-bold bg-blue-100 p-5 rounded mt-5 lg:ml-20 ml-5 mr-20 h-min">
             <form className="gap-4 flex flex-col items-end">
               <button
                 className=" text-black mb-0 w-min rounded bg-red-500"
@@ -200,7 +201,7 @@ function ProfilePage() {
         ) : (
           <button
             onClick={handleUpdateSection}
-            className="bg-green-500 p-2 font-bold text-white ml-20 mr-20 h-min mt-5 rounded"
+            className="bg-green-500 p-2 font-bold text-white lg:ml-20 ml-5 mr-5 lg:w-min w-1/2 lg:mr-20 h-min mt-5 rounded"
           >
             Update
           </button>
