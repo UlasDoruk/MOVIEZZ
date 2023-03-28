@@ -25,10 +25,11 @@ function ProfilePage() {
   const navigate = useNavigate();
 
   const user = useSelector((state) => state.auth.user);
+  // const user = JSON.parse(localStorage.getItem("user"))
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [displayName, setDisplayName] = useState(user.displayName || "");
+  const [displayName, setDisplayName] = useState(user.displayName);
   const [photo, setPhoto] = useState(user.photoURL || "");
   let [showPassword, setShowPassword] = useState(false);
   let [updateSection, setUpdateSection] = useState(true);
@@ -51,6 +52,7 @@ function ProfilePage() {
     e.preventDefault();
     if (displayName) {
       await update({ displayName });
+      setDisplayName(displayName)
       toast.success("Profile Name Updated", {
         position: toast.POSITION.TOP_LEFT,
       });
@@ -162,7 +164,7 @@ function ProfilePage() {
                 <h2 className="text-black text-left">Profile Name</h2>
                 <input
                   type={"text"}
-                  placeholder={user.displayName}
+                  placeholder={displayName}
                   value={displayName}
                   className="rounded text-black"
                   onChange={(e) => setDisplayName(e.target.value)}

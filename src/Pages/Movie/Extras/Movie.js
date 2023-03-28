@@ -25,6 +25,7 @@ function Movie() {
   const movieTrailer = useSelector((state) => state.movies.movieTrailer);
   const movieFirstTrailer = useSelector((state) => state.movies.movieFirstTrailer);
   const user = useSelector((state)=>state.auth.user)
+  const favMovies = useSelector((state)=>state.auth.favMovies)
 
   const handleFavoriteMovies =async()=>{
     if(user){

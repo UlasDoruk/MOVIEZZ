@@ -1,8 +1,7 @@
-import { useSelector } from "react-redux";
 
 function Footer() {
 
-  const user = useSelector((state)=>state.auth.user)
+  const user = JSON.parse(localStorage.getItem("user"))
 
   return (
     <div className="bg-slate-900 text-white bottom-0 w-full font-bold  flex justify-center lg:text-2xl text-sm mt-10 mb-2 align-middle">

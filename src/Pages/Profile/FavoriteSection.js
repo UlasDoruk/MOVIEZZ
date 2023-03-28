@@ -18,10 +18,10 @@ import {
   fetchSimilarMovies,
   fetchRecommendedMovies,
 } from "../../redux/fetchApı";
+import { toast } from 'react-toastify';
 
 function FavoriteSection() {
 
-    // const favMovies = JSON.parse(localStorage.getItem("favMovies"))
     const favMovies = useSelector((state)=>state.auth.favMovies)
     const dispatch = useDispatch()
 
@@ -35,6 +35,7 @@ function FavoriteSection() {
 
     const handleDeleteFavMovie =async value=>{
     await deleteFavMovies(value.movie.id)
+    toast.success(`${value.movie.original_title} removed from Favorites`)
     }
 
   return (
@@ -71,10 +72,10 @@ function FavoriteSection() {
                     {item.movie.overview}
                   </span>
                   <Link
-                    to={`/movie/${item.id}`}
+                    to={`/movie/${item.movie.id}`}
                     className="text-white  p-2 flex justify-center bottom-0 bg-sky-700 hover:bg-sky-900"
                   >
-                    <button onClick={() => handleMovieID(item.id)} className="">
+                    <button onClick={() => handleMovieID(item.movie.id)} className="">
                       <FaWalking className="lg:w-10 lg:h-10 w-5 h-5 hover:pl-3" />
                     </button>
                   </Link>

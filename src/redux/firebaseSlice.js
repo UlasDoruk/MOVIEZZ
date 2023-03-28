@@ -9,11 +9,11 @@ const firebaseSlice = createSlice({
   reducers: {
     getRegister: (state, action) => {
       localStorage.setItem("user", JSON.stringify(action.payload));
-      state.user = JSON.parse(localStorage.getItem("user"))
+      state.user = action.payload
     },
     login: (state, action) => {
         localStorage.setItem("user", JSON.stringify(action.payload));
-      state.user = JSON.parse(localStorage.getItem("user"));
+      state.user = action.payload
     },
     logout: (state) => {
         localStorage.removeItem("user")
@@ -21,7 +21,8 @@ const firebaseSlice = createSlice({
       state.user = "";
     },
     addFavMovies: (state, action) => {
-      state.favMovies = [...state.favMovies,localStorage.setItem("favMovies",JSON.stringify(action.payload))]
+      // state.favMovies = [...state.favMovies,localStorage.setItem("favMovies",JSON.stringify(action.payload))]
+      state.favMovies = [...state.favMovies,action.payload];
     },
     setFavMovies: (state, action) => {
         localStorage.setItem(
