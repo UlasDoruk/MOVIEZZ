@@ -1,4 +1,4 @@
-# [MOVIEZZ]("")
+# [MOVIEZZ](https://udk-moviezz.netlify.app/)
 <hr>
 
 ## Installation
@@ -24,6 +24,7 @@
 
 ## Features
 
+- `Default Email : example@hotmail.com, password : 123123` 
 - [*TMDB*](https://developers.themoviedb.org/3/getting-started/introduction) based API 
 - Project design with **Tailwindcss**, **FlowbiteReact**, **ReactSwiper**,**MaterialUI**
 - Responsive design
