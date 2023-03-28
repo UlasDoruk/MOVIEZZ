@@ -8,6 +8,7 @@ import { useSelector} from 'react-redux'
 // Icon
 import {AiFillHeart} from "react-icons/ai"
 import { MdOutlineVideoLibrary } from "react-icons/md";
+import { toast } from "react-toastify";
 
 function Movie() {
 
@@ -26,8 +27,13 @@ function Movie() {
   const user = useSelector((state)=>state.auth.user)
 
   const handleFavoriteMovies =async()=>{
+    if(user){
       await addFavorite({ uid: user.uid, movie });
+      toast.success(`${movie.original_title} added to Favorite`);
       setFavMovies("");
+    }else{
+      toast.warning("You have to Signup")
+    }
   }
 
   return (

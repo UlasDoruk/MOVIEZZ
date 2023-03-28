@@ -4,6 +4,7 @@ import store from "../redux/store"
  
 // Firebase
 import { initializeApp } from "firebase/app";
+// Auth section
 import {
     getAuth
     ,createUserWithEmailAndPassword
@@ -13,6 +14,7 @@ import {
     ,updateEmail
     ,updatePassword
 } from "firebase/auth"
+// Database section
 import {
   addDoc,
   collection,
@@ -20,6 +22,9 @@ import {
   onSnapshot,
   query,
   where,
+  deleteDoc,
+  doc,
+  getDocs,
 } from "firebase/firestore";
 
 import {toast} from "react-toastify"
@@ -46,6 +51,24 @@ export const register = async (email, password, displayName) => {
       password,
       );
       user.displayName = displayName
+       if (user) {
+         onSnapshot(
+           query(
+             collection(db, "favMovies"),
+             where("uid", "==", auth.currentUser.uid)
+           ),
+           (doc) => {
+             store.dispatch(
+               setFavMovies(
+                 doc.docs.reduce(
+                   (movies, movie) => [...movies, movie.data()],
+                   []
+                 )
+               )
+             );
+           }
+         );
+       }
     return user;
   } catch (error) {
     toast.error(error.message, { position: toast.POSITION.TOP_LEFT });
@@ -56,23 +79,10 @@ export const login = async(email,password)=>{
     try{
         const {user} = await signInWithEmailAndPassword(auth,email,password)
         if(user){
-          onSnapshot(
-            query(
-              collection(db, "favMovies"),
-              where("uid", "==", auth.currentUser.uid)
-            ),
+          onSnapshot(query(collection(db, "favMovies"),where("uid", "==", auth.currentUser.uid)),
             (doc) => {
-              store.dispatch(
-                setFavMovies(
-                  doc.docs.reduce(
-                    (movies, movie) => [...movies, movie.data()],
-                    []
-                  )
-                )
-              );
-            }
+              store.dispatch(setFavMovies(doc.docs.reduce((movies, movie) => [...movies, movie.data()],[])));}
           );
-
         }
         return user
     }catch(error){
@@ -116,8 +126,26 @@ export const updatePASSWORD = async (data) => {
 };
 
 export const addFavorite =async data=>{
-  const result = await addDoc(collection(db, "favMovies"), data);
+  try{
+    await addDoc(collection(db, "favMovies"), data);
+  }catch(error)
+  {toast.error(error.message, { position: toast.POSITION.TOP_LEFT });}
 }
 
+export const deleteFavMovies = async (value) => {
+  try {
+    var x = ""
+    const result = await getDocs(query(collection(db, "favMovies"),where("uid", "==", auth.currentUser.uid)));
+    result.forEach((doc) => {
+      if (doc.data().movie.id == value) {
+        const ID = doc.id
+        x = ID
+      }
+    });
+    await deleteDoc(doc(db, "favMovies", x));
+  } catch (error) {
+    toast.error(error.message);
+  }
+};
 
 export default app

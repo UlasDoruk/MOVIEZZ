@@ -32,7 +32,8 @@ const firebaseSlice = createSlice({
             })
           )
         );
-    state.favMovies = JSON.parse(localStorage.getItem("favMovies"));
+    // state.favMovies = JSON.parse(localStorage.getItem("favMovies"));
+    state.favMovies = action.payload
     },
   },
 });
