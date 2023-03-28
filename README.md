@@ -1,4 +1,4 @@
-# [MOVIEZZ](""). 
+# [MOVIEZZ]("")
 <hr>
 
 ## Installation
@@ -28,6 +28,7 @@
 - Project design with **Tailwindcss**, **FlowbiteReact**, **ReactSwiper**,**MaterialUI**
 - Responsive design
 - Home page contains Popular and Upcoming movies
+- The search bar contains all movies which are in the TMDB database
 - Top Rated page contains Top rated movies with *Load More* button
 - **Firebase** and **FireStore** based *Email* *Password* `Register`, `Login` and `Logout` authentication. Moreover updatable *Email*, *Password*, *Profile Name* and *Profile Avatar*
 - Individual movie pages contains *Favorite* button, *Movie Cast*, *Similar* and *Recommended* movies .
