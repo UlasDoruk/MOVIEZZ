@@ -56,11 +56,19 @@ function PopularPage() {
             <SwiperSlide key={item.id}>
               <div className="max-w-sm shadow bg-gray-800 mb-5">
                 <div className="relative ">
-                  <img
-                    className=""
-                    src={`${process.env.REACT_APP_API_IMAGE}${item.poster_path}`}
-                    alt=""
-                  />
+                  <Link to={`/movie/${item.id}`}>
+                    <img
+                      onClick={()=>handleMovieID(item.id)}
+                      className=""
+                      src={
+                        item.poster_path
+                          ? `${process.env.REACT_APP_API_IMAGE}${item.poster_path}`
+                          : "https://pbs.twimg.com/profile_images/1243623122089041920/gVZIvphd_400x400.jpg"
+                      }
+                      alt=""
+                    />
+                  </Link>
+
                   <div className="absolute lg:font-bold text-xs bg-sky-700 lg:rounded-full lg:mt-2 lg:mr-2 lg:p-2 p-1 text-white  -right-0 -top-0">
                     {item.vote_average}
                   </div>
@@ -75,7 +83,7 @@ function PopularPage() {
                     className="text-white  p-2  flex justify-center lg:mr-5"
                   >
                     <FaWalking className="lg:w-10 lg:h-10 w-5 h-5 lg:mr-14" />
-                    <p className="hidden lg:block font-mono text-lg opacity-50 mt-1">
+                    <p className="hidden lg:block font-mono text-lg opacity-30 mt-1">
                       {item.release_date}
                     </p>
                   </button>
