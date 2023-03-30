@@ -61,7 +61,7 @@ function SimilarMovies() {
                       alt=""
                     />
                     <div className="absolute lg:font-bold text-xs bg-sky-700 lg:rounded-full lg:mt-2 lg:mr-2 lg:p-2 p-1 text-white  -right-0 -top-0">
-                      {item.vote_average.toString().slice(0, 3)}
+                      {item.vote_average && item.vote_average.toString().slice(0, 3)}
                     </div>
                   </div>
                 </div>

@@ -42,7 +42,7 @@ function PopularPage() {
   }, [dispatch]);
 
   return (
-    <div className="lg:mb-10 mb-5 mt-5">
+    <div className="lg:mb-10 mb-5 mt-5 ">
       {status === "loading" && <Loading />}
       <Swiper
         modules={[Scrollbar]}
@@ -55,10 +55,10 @@ function PopularPage() {
           return (
             <SwiperSlide key={item.id}>
               <div className="max-w-sm shadow bg-gray-800 mb-5">
-                <div className="relative ">
+                <div className="">
                   <Link to={`/movie/${item.id}`}>
                     <img
-                      onClick={()=>handleMovieID(item.id)}
+                      onClick={() => handleMovieID(item.id)}
                       className=""
                       src={
                         item.poster_path
